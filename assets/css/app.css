@@ -1,0 +1,16 @@
+html, body {
+	background: #fff;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 1.1em;
+	line-height: 1.7em;
+}
+
+#top-menu {
+	background: #fff;
+	border-bottom: 1px solid #ccc;
+	color: #1e1e1e;
+}
+
+#top-menu a {
+	color: #1e1e1e;	
+}
