@@ -1,2 +1,2 @@
-//var API = window.location.hostname+'/API/';
+$(document).foundation();
 var API = 'localhost:8088/API/';

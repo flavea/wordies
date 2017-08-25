@@ -3,14 +3,49 @@ html, body {
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 1.1em;
 	line-height: 1.7em;
+	min-height: 100vh;
 }
 
-#top-menu {
+h1, h2, h3, h4, h5, h6 { font-family: 'Crimson Text', sans-serif;  }
+
+#main-menu {
 	background: #fff;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #DFD6AF;
 	color: #1e1e1e;
+	position: fixed;
+	top: 0;
+	left: 25%;
+	z-index: 10;
+	width: 70%;
+	margin: 0 2.5%;
 }
 
-#top-menu a {
-	color: #1e1e1e;	
+#main-menu a {
+	color: #C1D1B7;	
+	padding: 1.5em;
+	font-size: .8em;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+#sidebar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 25%;
+	padding: 10% 2em;
+	height: 100%;
+	border-right: 1px solid #DFD6AF;
+	text-align: center;
+
+	z-index: 9;
+}
+
+#container {
+	width: 75%;
+	margin-left: 25%;
+}
+
+#container--content {
+	margin: 5em 4%;
 }

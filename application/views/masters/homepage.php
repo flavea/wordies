@@ -1,3 +1,10 @@
-<div class="container">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In massa tempor nec feugiat nisl pretium. Adipiscing enim eu turpis egestas pretium aenean pharetra magna ac. Fermentum odio eu feugiat pretium nibh ipsum. Dis parturient montes nascetur ridiculus mus. Id donec ultrices tincidunt arcu non sodales neque. Amet mauris commodo quis imperdiet. Pretium vulputate sapien nec sagittis aliquam malesuada. Egestas dui id ornare arcu.
+<div id="sidebar">
+<h1>Wordies</h1>
+<p>Manage and publish your stories online.</p>
+</div>
+
+<div id="container">
+	<div id="container--content">
+		lorem ipsum
+	</div>
 </div>
