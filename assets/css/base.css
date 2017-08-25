@@ -840,7 +840,6 @@ textarea {
     outline: none;
     border: 1px solid #8a8a8a;
     background-color: #fefefe;
-    box-shadow: 0 0 5px #cacaca;
     transition: box-shadow 0.5s, border-color 0.25s ease-in-out; }
 
 textarea {

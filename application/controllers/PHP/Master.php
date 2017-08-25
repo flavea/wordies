@@ -9,4 +9,13 @@ class Master extends MY_Controller {
 	public function index() {
 		$this->render('homepage','basic', 'masters');
 	}
+	public function stories() {
+		$this->render('stories','basic', 'masters');
+	}
+	public function authors() {
+		$this->render('authors','basic', 'masters');
+	}
+	public function page() {
+		$this->render('page','basic', 'masters');
+	}
 }

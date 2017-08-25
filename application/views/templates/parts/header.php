@@ -19,7 +19,7 @@
     <?php if($image) { ?>
     <meta property="og:image" content="<?php echo $image ?>" />
     <?php } else { ?>
-    <meta property="og:image" content="<?=base_url();?>assets/img/logo.jpg ?>">
+    <meta property="og:image" content="<?=base_url();?>assets/img/logo.png ?>">
     <?php } ?>
 
 
@@ -30,7 +30,7 @@
     <?php if($image) { ?>
     <meta name="twitter:image" content="<?php echo $image ?>">
     <?php } else { ?>
-    <meta name="twitter:image" content="<?=base_url();?>img/logo.jpg ?>">
+    <meta name="twitter:image" content="<?=base_url();?>img/logo.png ?>">
     <?php } ?>
 
 
@@ -49,7 +49,7 @@
     <script src="<?php echo base_url().'assets/js/app/'.$the_view ?>.js"></script>
     <link rel="stylesheet" href="<?=base_url();?>assets/css/base.css" />
     <link rel="stylesheet" href="<?=base_url();?>assets/css/app.css" />
-    <link rel="icon" href="<?=base_url();?>assets/img/logo.jpg" sizes="any" type="image/jpg">
+    <link rel="icon" href="<?=base_url();?>assets/img/logo.png" sizes="any" type="image/png">
     <!--<meta name="keywords" content="<?php echo $header->keywords;?>">
     <meta name="description" content="<?php echo $header->description;?>">-->
 
