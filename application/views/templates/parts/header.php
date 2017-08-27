@@ -44,10 +44,11 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Libre+Baskerville|Source+Sans+Pro" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>
-    <script src="<?=base_url();?>assets/js/config.js"></script>
-    <script src="<?=base_url();?>assets/js/vendor/base.js"></script>
+    <script src="<?=base_url();?>assets/js/uikit.min.js"></script>
+    <script src="<?=base_url();?>assets/js/uikit-icons.min.js"></script>
+    <script src="<?=base_url();?>assets/js/app.js"></script>
     <script src="<?php echo base_url().'assets/js/app/'.$the_view ?>.js"></script>
-    <link rel="stylesheet" href="<?=base_url();?>assets/css/base.css" />
+    <link rel="stylesheet" href="<?=base_url();?>assets/css/uikit.css" />
     <link rel="stylesheet" href="<?=base_url();?>assets/css/app.css" />
     <link rel="icon" href="<?=base_url();?>assets/img/logo.png" sizes="any" type="image/png">
     <!--<meta name="keywords" content="<?php echo $header->keywords;?>">

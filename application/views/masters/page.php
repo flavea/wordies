@@ -1,4 +1,5 @@
-<div id="content">
+
+ <div class="uk-container uk-container-small">
 <h1>Title</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nulla aliquet porttitor lacus luctus accumsan tortor posuere. Facilisi etiam dignissim diam quis enim lobortis. Amet venenatis urna cursus eget. Pellentesque habitant morbi tristique senectus et netus et. Tellus id interdum velit laoreet id. Ultricies integer quis auctor elit sed. Gravida arcu ac tortor dignissim. Vestibulum mattis ullamcorper velit sed ullamcorper. In tellus integer feugiat scelerisque varius morbi enim nunc faucibus. Nulla pharetra diam sit amet nisl suscipit adipiscing. Risus nec feugiat in fermentum posuere urna. Egestas integer eget aliquet nibh praesent tristique.
 

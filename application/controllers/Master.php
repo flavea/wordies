@@ -15,7 +15,25 @@ class Master extends MY_Controller {
 	public function authors() {
 		$this->render('authors','basic', 'masters');
 	}
+	public function login() {
+		$this->render('login','basic', 'masters');
+	}
 	public function page() {
 		$this->render('page','basic', 'masters');
+	}
+	public function profile() {
+		$this->render('profile','profile', 'profiles');
+	}
+	public function comments() {
+		$this->render('comments','profile', 'profiles');
+	}
+	public function story() {
+		$this->render('index','story', 'story');
+	}
+	public function chapter() {
+		$this->render('chapter','story', 'story');
+	}
+	public function people() {
+		$this->render('people','story', 'story');
 	}
 }

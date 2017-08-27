@@ -1,6 +1,6 @@
 
  <div class="uk-container uk-container-small">
- 		<h2 class="category-title"><span>Stories</span></h2>
+ 		<h2 class="category-title"><span>Recommendations</span></h2>
 		<?php for($i = 0; $i < 10; $i++) { ?>
 		<div class="summary-box uk-clearfix uk-margin-large">
 			<img src="http://i.imgur.com/QVAgcLa.jpg" class="uk-float-left">
