@@ -29,9 +29,9 @@
 
 				<h2 class="category-title uk-margin-small-top"><span>Chapters</span></h2>
 				<div id="chapters">
-					<a class="uk-display-block uk-text-uppercase uk-text-large uk-link-reset"><span class="uk-margin-large-right">01.</span> Prolog</a>
-					<a class="uk-display-block uk-text-uppercase uk-text-large uk-link-reset"><span class="uk-margin-large-right">02.</span> The Wind That Blows Me Toward You</a>
-					<a class="uk-display-block uk-text-uppercase uk-text-large uk-link-reset"><span class="uk-margin-large-right">03.</span> Goodbye</a>
+		 			<a class="uk-display-block uk-button uk-button-text uk-text-left"><h3 class="uk-text-uppercase"><span class="uk-margin-large-right">01.</span> Prolog</h3></a>
+		 			<a class="uk-display-block uk-button uk-button-text uk-text-left"><h3 class="uk-text-uppercase"><span class="uk-margin-large-right">02.</span> The Wind That Blows Me Towards You</h3></a>
+		 			<a class="uk-display-block uk-button uk-button-text uk-text-left"><h3 class="uk-text-uppercase"><span class="uk-margin-large-right">03.</span> And The Wind Stops Blowing</h3></a>
 				</div>
 			</div>
 		</div>

@@ -36,4 +36,16 @@ class Master extends MY_Controller {
 	public function people() {
 		$this->render('people','story', 'story');
 	}
+	public function dashboard() {
+		$this->render('dashboard','profile', 'dashboard');
+	}
+	public function story_dashboard() {
+		$this->render('story','basic', 'dashboard');
+	}
+	public function chapter_dashboard() {
+		$this->render('chapter','basic', 'dashboard');
+	}
+	public function section() {
+		$this->render('section','basic', 'dashboard');
+	}
 }

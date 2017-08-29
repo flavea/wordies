@@ -25,6 +25,8 @@
     <div class="uk-position-right">
  	</div>
  </div>
+
+ <?php if($the_view != "dashboard"): ?>
  <div id="profile-menu" class="uk-text-center">
  	<ul class="uk-subnav uk-subnav-divide uk-subnav-pill uk-margin-remove-bottom" uk-margin>
 	    <li class="uk-active"><a href="#">Stories</a></li>
@@ -35,3 +37,4 @@
 	    <li><a href="#">Comments</a></li>
 	</ul>
  </div>
+<?php endif; ?>

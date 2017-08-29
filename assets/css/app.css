@@ -43,7 +43,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Crimson Text', sans-serif;  }
 }
 
 #container--content {
-	margin: 5em auto;
+	margin: 8em auto;
 }
 
 footer {
@@ -136,7 +136,7 @@ footer {
 	margin: 8em auto;
 }
 
-#dashboard-header {
+#dashboard-header, #dashboard {
 	width: 80%;
 	margin: 8em auto 0 auto;
 	position: relative;
@@ -252,4 +252,8 @@ progress::-webkit-progress-bar {
 	height: 70vh;
 	overflow: auto;
 	padding-right: 2em;
+}
+
+.tinymce {
+	min-height: 5em;
 }
