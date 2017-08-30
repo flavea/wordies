@@ -1,4 +1,4 @@
-<div id="content-small" class="uk-text-center">
+<div class="uk-container uk-container-small uk-margin-xlarge-top uk-padding-large uk-text-center">
 
 	<div class="uk-card uk-card-default uk-card-body">
 	<form>
@@ -18,8 +18,8 @@
 			</div>
 		</div>
 		<div class="uk-margin">
-			<input class="uk-button uk-button-default uk-button-primary" value="Submit" type="Submit">
-			<a class="uk-button uk-button-default uk-button-secondary">Register</a>
+			<input class="uk-button uk-button-default uk-button-secondary" value="Login" type="Submit">
+			<a class="uk-button uk-button-default">Register</a>
 		</div>
 
 		<a href="/">Forgot Password</a>

@@ -2,6 +2,10 @@
 
 <div id="story" class="uk-child-width-1-1@s uk-child-width-1-2@m" uk-grid>
 
+	<div class="uk-inline uk-width-1-1@s uk-hidden@m">
+		<img src="http://i.imgur.com/QVAgcLa.jpg" width="100%">
+	</div>
+
 
 	<div class="uk-inline uk-width-2-3@m">
 		<div class="uk-padding-large">
@@ -36,7 +40,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="uk-width-1-3@m">
+	<div class="uk-width-1-3@m uk-visible@m">
 		<img src="http://i.imgur.com/QVAgcLa.jpg" width="100%">
 	</div>
 </div>

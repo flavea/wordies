@@ -19,8 +19,8 @@
 							<a class="uk-card uk-card-default uk-card-body uk-display-block">
 
 								<img src="https://placehold.it/100x100" class="uk-border-circle uk-margin-small-bottom">
-								<span class="uk-text-large uk-text-bold">Flavea</span>
-								<div class="author-stat" class="uk-text-uppercase">
+								<span class="uk-text-large uk-text-bold uk-text-center uk-display-block">Flavea</span>
+								<div class="uk-text-small uk-text-uppercase uk-text-center">
 									1 Story, 8 followers
 								</div>
 							</a>
@@ -31,7 +31,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="uk-width-1-3@m">
+	<div class="uk-width-1-3@m uk-visible@m">
 		<img src="http://i.imgur.com/QVAgcLa.jpg" width="100%">
 	</div>
 </div>

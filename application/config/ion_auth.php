@@ -20,6 +20,7 @@
 * Requirements: PHP5 or above
 *
 */
+
 /*
 | -------------------------------------------------------------------------
 | Tables.
@@ -30,6 +31,7 @@ $config['tables']['users']           = 'users';
 $config['tables']['groups']          = 'groups';
 $config['tables']['users_groups']    = 'users_groups';
 $config['tables']['login_attempts']  = 'login_attempts';
+
 /*
  | Users table column and Group table column you want to join WITH.
  |
@@ -38,6 +40,7 @@ $config['tables']['login_attempts']  = 'login_attempts';
  */
 $config['join']['users']  = 'user_id';
 $config['join']['groups'] = 'group_id';
+
 /*
  | -------------------------------------------------------------------------
  | Hash Method (sha1 or bcrypt)
@@ -69,6 +72,7 @@ $config['random_rounds']  = FALSE;
 $config['min_rounds']     = 5;
 $config['max_rounds']     = 9;
 $config['salt_prefix']    = version_compare(PHP_VERSION, '5.3.7', '<') ? '$2a$' : '$2y$';
+
 /*
  | -------------------------------------------------------------------------
  | Authentication options.
@@ -78,11 +82,11 @@ $config['salt_prefix']    = version_compare(PHP_VERSION, '5.3.7', '<') ? '$2a$' 
  | The controller should check this function and act
  | appropriately. If this variable set to 0, there is no maximum.
  */
-$config['site_title']                 = "Reserve In Private";       // Site Title, example.com
+$config['site_title']                 = "Example.com";       // Site Title, example.com
 $config['admin_email']                = "admin@example.com"; // Admin Email, admin@example.com
 $config['default_group']              = 'members';           // Default group, use name
 $config['admin_group']                = 'admin';             // Default administrators group, use name
-$config['identity']                   = 'username';             // You can use any unique column in your table as identity column. The values in this column, alongside password, will be used for login purposes
+$config['identity']                   = 'email';             // You can use any unique column in your table as identity column. The values in this column, alongside password, will be used for login purposes
 $config['min_password_length']        = 8;                   // Minimum Required Length of Password
 $config['max_password_length']        = 20;                  // Maximum Allowed Length of Password
 $config['email_activation']           = FALSE;               // Email Activation for registration
@@ -99,6 +103,7 @@ $config['recheck_timer']              = 0;                   /* The number of se
 							           Leave 0 if you don't want session recheck. if you really think you need to recheck the session against database, we would
 								   recommend a higher value, as this would affect performance */
 								
+
 /*
  | -------------------------------------------------------------------------
  | Cookie options.
@@ -108,6 +113,7 @@ $config['recheck_timer']              = 0;                   /* The number of se
  */
 $config['remember_cookie_name'] = 'remember_code';
 $config['identity_cookie_name'] = 'identity';
+
 /*
  | -------------------------------------------------------------------------
  | Email options.
@@ -120,6 +126,7 @@ $config['use_ci_email'] = FALSE; // Send Email using the builtin CI email class,
 $config['email_config'] = array(
 	'mailtype' => 'html',
 );
+
 /*
  | -------------------------------------------------------------------------
  | Email templates.
@@ -128,6 +135,7 @@ $config['email_config'] = array(
  | Default: auth/
  */
 $config['email_templates'] = 'auth/email/';
+
 /*
  | -------------------------------------------------------------------------
  | Activate Account Email Template
@@ -135,6 +143,7 @@ $config['email_templates'] = 'auth/email/';
  | Default: activate.tpl.php
  */
 $config['email_activate'] = 'activate.tpl.php';
+
 /*
  | -------------------------------------------------------------------------
  | Forgot Password Email Template
@@ -142,6 +151,7 @@ $config['email_activate'] = 'activate.tpl.php';
  | Default: forgot_password.tpl.php
  */
 $config['email_forgot_password'] = 'forgot_password.tpl.php';
+
 /*
  | -------------------------------------------------------------------------
  | Forgot Password Complete Email Template
@@ -149,6 +159,7 @@ $config['email_forgot_password'] = 'forgot_password.tpl.php';
  | Default: new_password.tpl.php
  */
 $config['email_forgot_password_complete'] = 'new_password.tpl.php';
+
 /*
  | -------------------------------------------------------------------------
  | Salt options
@@ -161,7 +172,8 @@ $config['email_forgot_password_complete'] = 'new_password.tpl.php';
  | fbaa5e216d163a02ae630ab1a43372635dd374c0 with default salt.
  */
 $config['salt_length'] = 22;
-$config['store_salt']  = TRUE;
+$config['store_salt']  = FALSE;
+
 /*
  | -------------------------------------------------------------------------
  | Message Delimiters.
@@ -172,5 +184,6 @@ $config['message_start_delimiter'] = '<p>'; 	// Message start delimiter
 $config['message_end_delimiter']   = '</p>'; 	// Message end delimiter
 $config['error_start_delimiter']   = '<p>';		// Error message start delimiter
 $config['error_end_delimiter']     = '</p>';	// Error message end delimiter
+
 /* End of file ion_auth.php */
 /* Location: ./application/config/ion_auth.php */

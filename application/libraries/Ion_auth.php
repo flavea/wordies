@@ -538,11 +538,4 @@ class Ion_auth
 		return $check_all;
 	}
 
-
-	public function is_partner($id=false)
-	{
-
-		return $this->ion_auth_model->is_partner($id);
-	}
-
 }

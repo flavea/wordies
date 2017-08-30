@@ -24,6 +24,14 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Crimson Text', sans-serif;  }
 	z-index: 999;
 }
 
+.uk-badge-custom {
+	transform: scale(.8);
+	color: #fff!important;
+	background: red;
+	z-index: 99;
+	right: -10px;
+} 
+
 #sidebar {
 	position: fixed;
 	top: 15%;
@@ -36,16 +44,38 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Crimson Text', sans-serif;  }
 	z-index: 9;
 }
 
-#container {
-	width: 55%;
-	margin-left: 35%;
-	min-height: 100vh;
-}
+@media only screen and (min-width: 640px) {
 
-#container--content {
-	margin: 8em auto;
-}
+	#container {
+		width: 55%;
+		margin-left: 30%;
+		min-height: 100vh;
+	}
 
+	#container--content {
+		margin: 5em auto;
+	}
+
+
+	#story {
+		max-height: 100vh;
+		overflow: hidden;
+	}
+
+
+	#chapters {
+		max-height: 30vh;
+		overflow: auto;
+	}
+	#story-people {
+		height: 70vh;
+		overflow: auto;
+		padding-right: 2em;
+	}
+
+
+
+} 
 footer {
 	padding: 1em;
 	margin: 1em 0;
@@ -69,6 +99,8 @@ footer {
 	width: 150px;
 }
 
+
+
 .label:before {
 	content: "— ";
 }
@@ -85,6 +117,12 @@ footer {
 #info {
 	width: calc(100% - 150px - 2em);
 }
+@media only screen and (max-width: 640px) {
+
+	.summary-box .uk-float-left, .summary-box .uk-float-right {float:none;width: 100%;}
+	#info { width: 100%; margin-top: 1em;}
+
+} 
 
 .line {
 	width: 5em;
@@ -137,8 +175,6 @@ footer {
 }
 
 #dashboard-header, #dashboard {
-	width: 80%;
-	margin: 8em auto 0 auto;
 	position: relative;
 	min-height: 125px;
 }
@@ -150,8 +186,6 @@ footer {
 }
 
 #profile-menu {
-	width: calc(80% + 5em);
-	margin: 0 auto 2em auto;
 	border-bottom: 1px solid #e5e5e5;
 	text-align: center;
 }
@@ -160,100 +194,89 @@ footer {
 	margin: 10px;
 }
 
-#story {
-	max-height: 100vh;
-	overflow: hidden;
-}
-
-#chapters {
-	max-height: 30vh;
-	overflow: auto;
-}
-
 progress {
-  /* Positioning */
-  position: fixed;
-  left: 0;
-  top: 0;
+	/* Positioning */
+	position: fixed;
+	left: 0;
+	top: 0;
 
-  /* Dimensions */
-  width: 100%;
-  height: .25em;
+	/* Dimensions */
+	width: 100%;
+	height: .25em;
 
-  /* Reset the apperance */  
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+	/* Reset the apperance */  
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 
-  /* Get rid of the default border in Firefox/Opera. */
-  border: none;
+	/* Get rid of the default border in Firefox/Opera. */
+	border: none;
 
-  /* For Firefox/IE10+ */
-  background-color: transparent;
+	/* For Firefox/IE10+ */
+	background-color: transparent;
 
-  /* For IE10+, color of the progress bar */
-  color: #2292f2;
+	/* For IE10+, color of the progress bar */
+	color: #2292f2;
 }
 
 progress::-webkit-progress-bar {
-  background-color: transparent;
+	background-color: transparent;
 }
 
 .flat::-webkit-progress-value {
-  background-color: #2292f2;
+	background-color: #2292f2;
 }
 
 .flat::-moz-progress-bar {
-  background-color: #2292f2;
+	background-color: #2292f2;
 }
 
 .single::-webkit-progress-value {
-  background-color: transparent;
-  background-image: -webkit-linear-gradient(left, transparent, #2292f2);
+	background-color: transparent;
+	background-image: -webkit-linear-gradient(left, transparent, #2292f2);
 }
 
 .single::-moz-progress-bar {
-  background-color: transparent;
-  background-image: -moz-linear-gradient(left, transparent, #2292f2);
+	background-color: transparent;
+	background-image: -moz-linear-gradient(left, transparent, #2292f2);
 }
 
 .multiple::-webkit-progress-value {
-  background-image: -webkit-linear-gradient(-45deg, 
-                               transparent 33%, rgba(0, 0, 0, .1) 33%, 
-                               rgba(0,0, 0, .1) 66%, transparent 66%),
-                      -webkit-linear-gradient(left, green, #2292f2);
+	background-image: -webkit-linear-gradient(-45deg, 
+		transparent 33%, rgba(0, 0, 0, .1) 33%, 
+		rgba(0,0, 0, .1) 66%, transparent 66%),
+	-webkit-linear-gradient(left, green, #2292f2);
 }
 
 .multiple::-moz-progress-bar {
-  background-image: -moz-linear-gradient(-45deg, 
-                               transparent 33%, rgba(0, 0, 0, .1) 33%, 
-                               rgba(0,0, 0, .1) 66%, transparent 66%),
-                      -moz-linear-gradient(left, green, #2292f2);
+	background-image: -moz-linear-gradient(-45deg, 
+		transparent 33%, rgba(0, 0, 0, .1) 33%, 
+		rgba(0,0, 0, .1) 66%, transparent 66%),
+	-moz-linear-gradient(left, green, #2292f2);
 }
 
 .progress-container {
-  width: 100%;
-  background-color: transparent;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: .25em;
-  display: block;
+	width: 100%;
+	background-color: transparent;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: .25em;
+	display: block;
 }
 
 .progress-bar {
-  background-color: #2292f2;
-  width: 50%;
-  display: block;
-  height: inherit;
+	background-color: #2292f2;
+	width: 50%;
+	display: block;
+	height: inherit;
 }
 
-#story-people {
-	height: 70vh;
-	overflow: auto;
-	padding-right: 2em;
-}
 
 .tinymce {
 	min-height: 5em;
+}
+
+.toggle-menu {
+	border-right: 1px solid #e5e5e5;
 }

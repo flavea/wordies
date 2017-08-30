@@ -1,5 +1,6 @@
+ <div class="uk-margin-xlarge-top uk-container uk-container-large">
  <div id="dashboard-header" class="uk-dark uk-background-muted uk-padding">
- 	<img class="uk-align-left uk-border-circle" src="https://placehold.it/125x125" alt="">
+ 	<img class="uk-align-left@m uk-border-circle" src="https://placehold.it/125x125" alt="">
  	<h2 class="uk-margin-remove uk-margin-small-top">
  		Flavea
  		<a class="uk-icon-button" uk-icon="icon: plus; ratio: .7" title="Follow This Author" uk-tooltip></a>
@@ -15,7 +16,7 @@
  	</p>
 
  	
-    <div class="uk-position-right uk-margin-large-right uk-flex uk-flex-middle">
+    <div class="uk-position-right uk-margin-large-right uk-flex uk-flex-middle uk-visible@l">
  		<div class="uk-padding-small uk-text-uppercase"><h1 class="uk-margin-remove">25</h1>Stories</div>
  		<div class="uk-padding-small uk-text-uppercase"><h1 class="uk-margin-remove">25</h1>Comments</div>
  		<div class="uk-padding-small uk-text-uppercase"><h1 class="uk-margin-remove">25</h1>Followers</div>
@@ -37,4 +38,6 @@
 	    <li><a href="#">Comments</a></li>
 	</ul>
  </div>
+
+<div class="uk-margin-large-top uk-container uk-container-small uk-padding-large">
 <?php endif; ?>

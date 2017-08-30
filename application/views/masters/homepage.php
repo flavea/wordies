@@ -1,11 +1,18 @@
-<div id="sidebar" class="show-for-medium">
-	<img src="../assets/img/logo-150.png">
+<div id="sidebar" class="uk-visible@m">
+	<img src="./assets/img/logo-150.png">
 	<p>Manage and publish your stories online.</p>
 	<a class="uk-button uk-button-default uk-display-block">Login</a>
 	<a class="uk-button uk-button-default uk-display-block uk-margin-small">Register</a>
 </div>
 
-<div id="container">
+<div class="uk-hidden@m uk-text-center uk-margin-large-top uk-padding-large">
+	<img src="./assets/img/logo-150.png">
+	<p>Manage and publish your stories online.</p>
+	<a class="uk-button uk-button-default uk-display-block">Login</a>
+	<a class="uk-button uk-button-default uk-display-block uk-margin-small">Register</a>
+</div>
+
+<div id="container" class="uk-padding-large">
 	<div id="container--content">
 		<h2 class="category-title"><span>Latest Stories</span></h2>
 		

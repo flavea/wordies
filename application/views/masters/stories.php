@@ -1,4 +1,4 @@
-<div id="sidebar" class="show-for-medium">
+<div id="sidebar" class="uk-visible@m">
 	<select class="uk-select uk-margin-small">
 		<option selected disabled>Order By</option>
 		<option value="hotdog">Hoer</option>
@@ -30,7 +30,50 @@
 	<input type="Submit" class="uk-button uk-button-primary uk-display-block" value="Filter Stories">
 </div>
 
-<div id="container">
+<div class="uk-hidden@m uk-margin-xlarge-top uk-padding-large uk-padding-remove-bottom">
+	<ul uk-accordion>
+		<li>
+
+			<h3 class="uk-accordion-title">Filters</h3>
+			<div class="uk-accordion-content">
+
+				<select class="uk-select uk-margin-small">
+					<option selected disabled>Order By</option>
+					<option value="hotdog">Hoer</option>
+					<option value="starbuck">Stt Dog</option>
+					<option value="apollo">Apollo</option>
+				</select>
+				<select class="uk-select uk-margin-small">
+					<option selected disabled>Genre</option>
+					<option value="husker">Husker</option>
+					<option value="starbuck">Starbuck</option>
+					<option value="hotdog">Hot Dog</option>
+					<option value="apollo">Apollo</option>
+				</select>
+				<select class="uk-select uk-margin-small">
+					<option selected disabled>Rating</option>
+					<option value="husker">Husker</option>
+					<option value="starbuck">Starbuck</option>
+					<option value="hotdog">Hot Dog</option>
+					<option value="apollo">Apollo</option>
+				</select>
+				<select class="uk-select uk-margin-small">
+					<option selected disabled>Complete</option>
+					<option value="husker">Husker</option>
+					<option value="starbuck">Starbuck</option>
+					<option value="hotdog">Hot Dog</option>
+					<option value="apollo">Apollo</option>
+				</select>
+				<input type="text" name="keyword" placeholder="Keyword" class="uk-input uk-margin-small">
+				<input type="Submit" class="uk-button uk-button-primary uk-display-block" value="Filter Stories">
+			</div>
+		</li>
+	</ul>
+</div>
+
+<hr class="uk-hidden@m">
+
+<div id="container" class="uk-padding-large">
 	<div id="container--content">
 		<h2 class="category-title"><span>Stories</span></h2>
 
