@@ -16,6 +16,7 @@
 	<div id="container--content">
 		<h2 class="category-title"><span>Latest Stories</span></h2>
 		
+		<?php if(isset($stories) && $stories != null) { ?>
 		<?php for($i = 0; $i < 10; $i++) { ?>
 		<div class="summary-box uk-clearfix uk-margin-large">
 			<img src="http://i.imgur.com/QVAgcLa.jpg" class="uk-float-left">
@@ -32,6 +33,10 @@
 				<div class="info"><b>Complete:</b> No</div>
 			</div>
 		</div>
+		<?php } ?>
+
+		<?php } else { ?>
+		<center>There is no story yet.</center>
 		<?php } ?>
 
 

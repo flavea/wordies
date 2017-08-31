@@ -6,26 +6,34 @@ class MY_Controller extends CI_Controller {
     protected $data = array();
     function __construct()
     {
-        parent::__construct();
+      parent::__construct();
+      $this->load->model('Basic_model');
+      $this->data['user'] = $this->ion_auth->user()->row();
+      $this->data['user_id'] = $this->data['user']->id;
+      $this->data['logged_in'] = $this->ion_auth->logged_in();
+      $this->data['genres'] = $this->Basic_model->get_genres();
+      $this->data['types'] = $this->Basic_model->get_types();
+      $this->data['ratings'] = $this->Basic_model->get_ratings();
+      $this->data['title'] = "Wordies";
+      $this->data['explanation'] = "Manage and publish your stories online.";
+      $this->data['image'] = "";
     }
 
     protected function render($the_view = NULL, $template = 'basic', $folder = '')
     {
       if(is_null($template))
       {
-        $this->load->view($the_view,$this->data);
+        $this->load->view($the_view, $this->data);
       }
       else
       {
-          $this->data['title'] = "Wordies";
-          $this->data['explanation'] = "Manage and publish your stories online.";
-          $this->data['image'] = "";
           $this->data['the_view'] = $the_view;
           $this->data['folder'] = $folder;
           $this->data['the_view_content'] = (is_null($the_view)) ? '' : $this->load->view($folder.'/'.$the_view, $this->data, TRUE);
           $this->load->view('templates/'.$template.'_template', $this->data);
       }
   }
+
 }
 
 class Auth_Controller extends MY_Controller {

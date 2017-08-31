@@ -1,29 +1,32 @@
 <div class="uk-container uk-container-small uk-margin-xlarge-top uk-padding-large uk-text-center">
 
 	<div class="uk-card uk-card-default uk-card-body">
-	<form>
-	<h3 class="uk-card-title">Login</h3>
+		<form>
+			<h3 class="uk-card-title">Login</h3>
 
-		<div class="uk-margin">
-			<div class="uk-inline">
-				<span class="uk-form-icon" uk-icon="icon: user"></span>
-				<input class="uk-input" type="text" placeholder="Username">
-			</div>
-		</div>
+			
+            <?php echo form_open("auth/login");?>
 
-		<div class="uk-margin">
-			<div class="uk-inline">
-				<span class="uk-form-icon" uk-icon="icon: lock"></span>
-				<input class="uk-input" type="text" placeholder="Password">
-			</div>
-		</div>
-		<div class="uk-margin">
-			<input class="uk-button uk-button-default uk-button-secondary" value="Login" type="Submit">
-			<a class="uk-button uk-button-default">Register</a>
-		</div>
+  <p>
+    <?php echo lang('login_identity_label', 'identity');?>
+    <?php echo form_input($identity);?>
+  </p>
 
-		<a href="/">Forgot Password</a>
-	</div>
+  <p>
+    <?php echo lang('login_password_label', 'password');?>
+    <?php echo form_input($password);?>
+  </p>
+
+  <p>
+    <?php echo lang('login_remember_label', 'remember');?>
+    <?php echo form_checkbox('remember', '1', FALSE, 'id="remember"');?>
+  </p>
+
+
+  <p><?php echo form_submit('submit', lang('login_submit_btn'));?></p>
+
+<?php echo form_close();?>
+		</div>
 
 	</form>
 </div>
