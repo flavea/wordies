@@ -19,9 +19,9 @@
 </p><p>Orang-orang bersorak, kembang api meletus di udara, dan kertas-kertas konfeti berjatuhan dari langit, dan Woohyun berteriak, "MANSE!"</p>
 
 <div class="uk-light uk-background-secondary uk-padding uk-margin-large">
-<b>Author:</b> Author<br>
-<b>Last Edited:</b> on August by Ilma<br>
-<b>Word Count:</b> 5000 words
+	<b>Author:</b> Author<br>
+	<b>Last Edited:</b> on August by Ilma<br>
+	<b>Word Count:</b> 5000 words
 </div>
 </div>
 
@@ -49,55 +49,46 @@
 	<?php } ?>
 </div>
 
-<div class="uk-inline uk-text-center uk-position-bottom-left uk-light uk-background-secondary uk-padding uk-visible@m" style="position: fixed!important;">
+<div class="uk-inline uk-text-center uk-position-bottom-left uk-padding uk-visible@m" style="position: fixed!important;">
 	<a href="/" uk-icon="icon:chevron-left" title="Previous Chapter" uk-tooltip class="uk-position-left uk-flex uk-flex-middle uk-margin-small-left"></a> 
 	<a href="/" uk-icon="icon:chevron-right" title="Next Chapter" uk-tooltip class="uk-position-right uk-flex uk-flex-middle uk-margin-small-right"></a>
 	<h1 class="uk-margin-remove">1/6</h1>
 
-	<a class="uk-text-uppercase uk-text-small">Chapter List</a>
-	<div uk-dropdown>
-
-		<ul class="uk-nav uk-navbar-dropdown-nav">
-			<li><a href="#">Home</a></li>
-			<li><a href="#">Dashboard</a></li>
-			<li><a href="#">Stories</a></li>
-			<li><a href="#">Authors</a></li>
-			<li><a href="#">My Profile</a></li>
-			<li><a href="#">Edit Profile</a></li>
-			<li><a href="#">Notifications</a></li>
-			<li><a href="#">Messages</a></li>
-			<li><a href="#">New Comments</a></li>
-			<li class="uk-nav-divider"></li>
-			<li><a href="#">Logout</a></li>
-		</ul>
-	</div>
+	<a class="uk-text-uppercase uk-text-small" uk-toggle="target: #offcanvas-reveal">Chapter List</a>
 </div>
 
 
 <div class="uk-inline uk-text-center uk-position-bottom-right uk-visible@m" style="position: fixed!important;">
-	<a class="uk-button uk-button-secondary uk-display-block" href="#comments" uk-scroll>Skip to Comments</a>
+	<a class="uk-button" href="#comments" uk-scroll>Skip to Comments</a>
 </div>
 
 <div class="uk-inline uk-position-bottom-right uk-hidden@m" style="background: #fff;width:100%;position: fixed!important;">
-<hr class="uk-margin-remove">
+	<hr class="uk-margin-remove">
 	<a href="/" uk-icon="icon:chevron-left" title="Previous Chapter" uk-tooltip class="uk-button toggle-menu"></a> 
 	<a href="/" uk-icon="icon:chevron-right" title="Next Chapter" uk-tooltip class="uk-button toggle-menu"></a>
-	<a href="#" class="uk-button"><span uk-icon="icon: table;ratio:.75" class="uk-margin-small-right uk-display-inline-block"></span> Chapter 01</a>  
-	<div uk-dropdown>
+	<a uk-toggle="target: #offcanvas-reveal" class="uk-button"><span uk-icon="icon: table;ratio:.75" class="uk-margin-small-right uk-display-inline-block"></span> Chapter 01</a> 
 
-		<ul class="uk-nav uk-navbar-dropdown-nav">
-			<li><a href="#">Home</a></li>
-			<li><a href="#">Dashboard</a></li>
-			<li><a href="#">Stories</a></li>
-			<li><a href="#">Authors</a></li>
-			<li><a href="#">My Profile</a></li>
-			<li><a href="#">Edit Profile</a></li>
-			<li><a href="#">Notifications</a></li>
-			<li><a href="#">Messages</a></li>
-			<li><a href="#">New Comments</a></li>
-			<li class="uk-nav-divider"></li>
-			<li><a href="#">Logout</a></li>
-		</ul>
+</div>
+<div class="uk-offcanvas-content">
+
+	<div id="offcanvas-reveal" class="uk-overflow-auto" uk-offcanvas="mode: reveal; overlay: true">
+		<div class="uk-offcanvas-bar">
+
+			<button class="uk-offcanvas-close" type="button" uk-close></button>
+
+			<h3>When The Cold Wind Blows</h3>
+
+			<ul class="uk-nav uk-nav-default">
+				<li><a href="#">01. Prologue</a></li>
+				<li class="uk-nav-divider"></li>
+				<li><a href="#">02. The Wind That Blows Me Towards You</a></li>
+				<li class="uk-nav-divider"></li>
+				<li><a href="#">03. A Deep Rooted Tree</a></li>
+				<li class="uk-nav-divider"></li>
+				<li><a href="#">03. Two Birds</a></li>
+				<li class="uk-nav-divider"></li>
+			</ul>
+
+		</div>
 	</div>
-
 </div>

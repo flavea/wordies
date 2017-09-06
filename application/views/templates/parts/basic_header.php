@@ -15,15 +15,15 @@
 					<div class="uk-navbar-dropdown">
 						<ul class="uk-nav uk-navbar-dropdown-nav">
 							<?php if($logged_in == true) { ?>
-							<li class="uk-active"><a href="#">My Profile</a></li>
-							<li><a href="#">My Dashboard</a></li>
+							<li class="uk-active"><a href="<?= base_url('profile/'.$user_id)?>">My Profile</a></li>
+							<li><a href="<?= base_url('dashboard/')?>">My Dashboard</a></li>
 							<li><a href="#">Write a New Story</a></li>
 							<li><a href="#">Edit Profile</a></li>
 							<li class="uk-inline uk-display-block uk-hidden@m"><a href="#">Notifications <span class="uk-position-top-right uk-badge uk-float-right uk-margin-small-top"><small>10</small></span></a></li>
 							<li class="uk-inline uk-display-block uk-hidden@m"><a href="#">Messages <span class="uk-position-top-right uk-badge uk-float-right uk-margin-small-top"><small>10</small></span></a></li>
 							<li class="uk-inline uk-display-block uk-hidden@m"><a href="#">New Comments <span class="uk-position-top-right uk-badge uk-float-right uk-margin-small-top"><small>10</small></span></a></li>
 							<li class="uk-nav-divider"></li>
-							<li><a href="#">Log Out</a></li>
+							<li><a href="<?=base_url('auth/logout')?>">Log Out</a></li>
 							<?php } else { ?>
 							<li><a href="#">Login</a></li>
 							<li><a href="#">Register</a></li>

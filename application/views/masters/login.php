@@ -8,7 +8,7 @@
             <?php echo form_open("auth/login");?>
 
   <p>
-    <?php echo lang('login_identity_label', 'identity');?>
+    <label for="identity">Username</label>
     <?php echo form_input($identity);?>
   </p>
 

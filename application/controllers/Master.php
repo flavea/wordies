@@ -11,4 +11,7 @@ class Master extends MY_Controller {
 		$this->data['stories'] = $this->Story_model->get_all_stories();
 		$this->render('homepage','basic', 'masters');
 	}
+	public function chapter() {
+		$this->render('chapter','story', 'story');
+	}
 }

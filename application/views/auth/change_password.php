@@ -1,4 +1,7 @@
-<h1><?php echo lang('change_password_heading');?></h1>
+<div class="uk-container uk-container-small uk-margin-xlarge-top uk-padding-large">
+
+  <div class="uk-card uk-card-default uk-card-body">
+  <h1><?php echo lang('change_password_heading');?></h1>
 
 <div id="infoMessage"><?php echo $message;?></div>
 
@@ -20,6 +23,8 @@
       </p>
 
       <?php echo form_input($user_id);?>
-      <p><?php echo form_submit('submit', lang('change_password_submit_btn'));?></p>
+      <input type="submit" name="submit" value="Change Password" class="uk-button uk-button-secondary" />
 
 <?php echo form_close();?>
+</div>
+</div>

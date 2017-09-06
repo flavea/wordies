@@ -1,28 +1,38 @@
-<h1><?php echo lang('login_heading');?></h1>
-<p><?php echo lang('login_subheading');?></p>
+<div class="uk-container uk-container-small uk-margin-xlarge-top uk-padding-large uk-text-center">
 
-<div id="infoMessage"><?php echo $message;?></div>
+  <div class="uk-card uk-card-default uk-card-body">
+    <h1><?php echo lang('login_heading');?></h1>
+    <p><?php echo lang('login_subheading');?></p>
 
-<?php echo form_open("auth/login");?>
+    <div id="infoMessage"><?php echo $message;?></div>
 
-  <p>
-    <?php echo lang('login_identity_label', 'identity');?>
+    <?php echo form_open("auth/login");?>
+
+    <div class="uk-margin">
+        <div class="uk-inline">
+          <span class="uk-form-icon" uk-icon="icon: user"></span>
     <?php echo form_input($identity);?>
-  </p>
+        </div>
+    </div>
 
-  <p>
-    <?php echo lang('login_password_label', 'password');?>
-    <?php echo form_input($password);?>
-  </p>
+    <div class="uk-margin">
+        <div class="uk-inline">
+          <span class="uk-form-icon" uk-icon="icon: lock"></span>
+        <?php echo form_input($password);?>
+        </div>
+    </div>
 
-  <p>
-    <?php echo lang('login_remember_label', 'remember');?>
-    <?php echo form_checkbox('remember', '1', FALSE, 'id="remember"');?>
-  </p>
+    <div class="uk-margin">
+      <input type="checkbox" name="remember" value="1"  id="remember" class="uk-checkbox" />
+      <label for="remember">Remember Me</label>
+    </div>
 
 
-  <p><?php echo form_submit('submit', lang('login_submit_btn'));?></p>
+    <p><input type="submit" name="submit" value="Login" class="uk-button uk-button-secondary" />
+    <a class="uk-button uk-button-default">Register</a></p>
 
-<?php echo form_close();?>
+    <?php echo form_close();?>
 
-<p><a href="forgot_password"><?php echo lang('login_forgot_password');?></a></p>
+    <p><a href="forgot_password"><?php echo lang('login_forgot_password');?></a></p>
+  </div>
+</div>

@@ -6,23 +6,25 @@
 <?php echo form_open(uri_string());?>
 
       <p>
-            <?php echo lang('edit_user_fname_label', 'first_name');?> <br />
-            <?php echo form_input($first_name);?>
+            <label>Username</label>
+            <?php echo form_input($identity);?>
       </p>
-
       <p>
-            <?php echo lang('edit_user_lname_label', 'last_name');?> <br />
-            <?php echo form_input($last_name);?>
+            <label>Profile Picture</label>
+            <?php echo form_input($profile);?>
       </p>
-
       <p>
-            <?php echo lang('edit_user_company_label', 'company');?> <br />
-            <?php echo form_input($company);?>
+            <label>Twitter Username</label>
+            <?php echo form_input($twitter);?>
       </p>
-
       <p>
-            <?php echo lang('edit_user_phone_label', 'phone');?> <br />
-            <?php echo form_input($phone);?>
+            <label>Facebook Username</label>
+            <?php echo form_input($facebook);?>
+      </p>
+      <p>
+
+            <?php echo lang('edit_user_password_label', 'password');?> <br />
+            <?php echo form_input($identity);?>
       </p>
 
       <p>
@@ -61,6 +63,6 @@
       <?php echo form_hidden('id', $user->id);?>
       <?php echo form_hidden($csrf); ?>
 
-      <p><?php echo form_submit('submit', lang('edit_user_submit_btn'));?></p>
+      <input type="submit" name="submit" value="Edit Profile" class="uk-button uk-button-secondary" />
 
 <?php echo form_close();?>
