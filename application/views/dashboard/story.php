@@ -39,19 +39,19 @@
  </h1>
 
  <?php if(isset($chapters) && $chapters != null) {
-    foreach ($chapters as $chapter) {
+    for($i = 0; $i < count($chapters); $i++) {
         ?>
         <div class="uk-inline uk-display-block">
          <h3 class="uk-text-uppercase">
           <span class="uk-margin-large-right">
-            <?php if ($chapter->id < 10) echo "0".$chapter->id.".";
-            else echo $chapter->id."."; ?>
+            <?php if ($i < 10) echo "0".($i+1).".";
+            else echo ($i+1)."."; ?>
         </span> 
-        <?php echo $chapter->title ?>
+        <?php echo $chapters[$i]->title ?>
     </h3>
     <div class="uk-position-right uk-margin-medium-right">
-      <a class="uk-icon-button" uk-icon="icon: file-edit; ratio: .7" title="Edit" uk-tooltip chid="<?php echo $chapter->id ?>"></a>
-      <a class="uk-icon-button" uk-icon="icon: trash; ratio: .7" title="Delete" uk-tooltip chid="<?php echo $chapter->id ?>"></a>
+      <a class="uk-icon-button" uk-icon="icon: file-edit; ratio: .7" title="Edit" href="<?= base_url('dashboard/chapter/'.$chapters[$i]->id) ?>"></a>
+      <a class="uk-icon-button" uk-icon="icon: trash; ratio: .7" title="Delete" uk-tooltip chid="<?php echo $chapters[$i]->id ?>"></a>
   </div>
 </div>
 <?php 
@@ -172,8 +172,8 @@
 
         <div class="uk-margin">
             <select class="uk-select" name="status">
-                <option>Private</option>
-                <option>Public</option>
+                <option value="0">Private</option>
+                <option value="1">Public</option>
             </select>
         </div>
 

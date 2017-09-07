@@ -11,7 +11,7 @@
 						<span class="uk-position-top-right uk-badge uk-badge-custom uk-hidden@m">10</span>
 						<img src="http://placeholder.it/20x20">
 					</div>
-					<span class="uk-visible@m">Hello, Guest</span> <span uk-icon="icon: chevron-down;" class="uk-margin-small-left@m"></span></a>
+					<span class="uk-visible@m">Hello, <?php echo $username ?></span> <span uk-icon="icon: chevron-down;" class="uk-margin-small-left@m"></span></a>
 					<div class="uk-navbar-dropdown">
 						<ul class="uk-nav uk-navbar-dropdown-nav">
 							<?php if($logged_in == true) { ?>

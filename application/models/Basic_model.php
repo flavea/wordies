@@ -3,30 +3,57 @@
 class Basic_model extends CI_Model
 {
 
-	public function sp($sp_name, $array) {
-
-	}
-
-	public function get_types() {
-		$query = $this->db->get('categories');
-		return $query->result();
-
-	}
-	public function get_genres() {
-		$query = $this->db->get('genres');
-		return $query->result();
+	public function sp($sp_name, $data) {
+		$q = '';
+		foreach($array as $key => $val)
+		{
+			$q .= '?';
+		}
 		
-	}
-	public function get_ratings() {
-		$query = $this->db->get('ratings');
+		$procedure = 'CALL '.$sp_name.'('.$q.')';
+	
+		$query = $this->db->query($procedure, $data);
+		mysqli_next_result($this->db->conn_id);
 		return $query->result();
+	}
+
+
+	public function simple_select($table, $where = null, $limit = null, $start = 0) {
+		if($limit != null) $this->db->limit($limit, $start);
+		if($where != null) $this->db->where($where);
+		$query = $this->db->get($table);
+		return $query->result();
+	}
+
+	public function insert($table, $data) {
+		$last_id = 0;
+	    $this->db->insert($table, $data);
+	    $last_id = $this->db->insert_id();
+		return $last_id;
+	}
+
+	public function delete($table, $where) {
+		$this->db->where($where);
+	    return $this->db->delete($table); 
+	}
+
+	public function update($table, $data, $where)
+	{
+		$this->db->where($where);
+		return $this->db->update($table, $data);
+	}
+
+
+	public function count_all($table, $where)
+	{
+		$this->db->where($where);
+		$this->db->from($table);
+		$count = $this->db->count_all_results();
+		return $count;
 	}
 
 	public function get_counts($user_id) {
-		$this->db->where('target', $user_id);
-		$this->db->where('flag', 0);
-		$this->db->from('notifications');
-		$notifications = $this->db->count_all_results();
+		$notifications = $this->count_all('notifications', $data = array('target' => $user_id, 'flag' => 0));
 
 		$this->db->where('message_replies.sender', $user_id);
 		$this->db->where("STR_TO_DATE(message_replies.date,'%m/%d/%Y') >", "STR_TO_DATE(message_log.time,'%m/%d/%Y')");
@@ -43,7 +70,7 @@ class Basic_model extends CI_Model
 		$comments = $this->db->count_all_results();
 
 
-		$count = $arrayName = array(
+		$count = array(
 			'message' => 1,
 			'notifications' => $notifications, 
 			'comments' => $comments, 
@@ -51,4 +78,5 @@ class Basic_model extends CI_Model
 			);
 		return $count;
 	}
+
 }

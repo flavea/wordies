@@ -280,3 +280,12 @@ progress::-webkit-progress-bar {
 .toggle-menu {
 	border-right: 1px solid #e5e5e5;
 }
+
+.ui-menu {
+	z-index: 999999999;
+	background: #fff;
+}
+.ui-menu li {
+	list-style: none;
+	background: #fff;
+}
