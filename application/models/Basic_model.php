@@ -18,10 +18,12 @@ class Basic_model extends CI_Model
 	}
 
 
-	public function simple_select($table, $where = null, $limit = null, $start = 0) {
+	public function simple_select($table, $where = null, $select = '*', $limit = null, $start = 0) {
 		if($limit != null) $this->db->limit($limit, $start);
 		if($where != null) $this->db->where($where);
-		$query = $this->db->get($table);
+		$this->db->select($select);
+		$this->db->from($table);
+		$query = $this->db->get();
 		return $query->result();
 	}
 

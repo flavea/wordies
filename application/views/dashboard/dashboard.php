@@ -83,6 +83,11 @@
 		</div>
 
 		<div class="uk-margin">
+			<input class="uk-input" type="text" placeholder="Story Cover Image URL (min 550 x 800 pixels)" name="cover">
+		</div>
+
+
+		<div class="uk-margin">
 			<select class="uk-select" name="type">
 				<?php
 				if(ISSET($types) && $types != null) {

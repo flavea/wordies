@@ -51,10 +51,10 @@ class Dashboard extends MY_Controller {
 		if($this->data['story'][0]->author_id != $this->ion_auth->user()->row()->id) {
 			show_404();
 		} else {
-			$this->data['chapters']   = $this->Basic_model->simple_select('chapters', array('story_id' => $id));
-			$this->data['characters'] = $this->Basic_model->simple_select('characters', array('story_id' => $id));
+			$this->data['chapters']   = $this->Basic_model->simple_select('chapters', array('story_id' => $id), 'id, title');
+			$this->data['characters'] = $this->Basic_model->simple_select('characters', array('story_id' => $id), 'id, name');
 			$this->data['resources']  = $this->Basic_model->simple_select('resources', array('story_id' => $id));
-			$this->data['comments']   = $this->Story_model->get_story_comments($id, 4);
+			//$this->data['comments']   = $this->Story_model->get_story_comments($id, 4);
 			$this->render('story','basic', 'Dashboard');
 		}
 	}
@@ -69,7 +69,7 @@ class Dashboard extends MY_Controller {
 		if($this->data['story'][0]->author_id != $this->ion_auth->user()->row()->id) {
 			show_404();
 		} else {
-			$this->data['sections']   = $this->Basic_model->simple_select('sections', array('chapter_id' => $id));
+			$this->data['sections']   = $this->Basic_model->simple_select('sections', array('chapter_id' => $id), 'id, desc');
 			$this->render('chapterdashboard','basic', 'Dashboard');
 		}
 	}
@@ -150,6 +150,19 @@ class Dashboard extends MY_Controller {
 	}
 
 
+
+	public function get_characters($id) {
+
+		$this->data['id'] = $id;
+		$characters = $this->Basic_model->simple_select('characters', array('story_id' => $id), 'name');
+		$this->data['story'] = $this->Basic_model->simple_select('stories', array('id' => $id));
+
+		if($this->data['story'][0]->author_id != $this->ion_auth->user()->row()->id) {
+			show_404();
+		} else {
+			echo json_encode($characters);
+		}
+	}
 
 	public function character($id) {
 

@@ -1,114 +1,6 @@
  
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-<script>
-	var iTotalWords;
-	tinymce.init({
-		selector: 'div.tinymce',
-		theme: 'inlite',
-		plugins: 'link paste contextmenu textpattern autolink wordcount autoresize paste',
-		selection_toolbar: 'undo redo | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | h2 h3 blockquote',
-		inline: true
-	});
-
-	$(function() {
-		var wordCounts = {};
-		$("div.tinymce").keyup(function() {
-			iTotalWords = $("div.tinymce").text().split(' ').length;
-			$(".words").html(iTotalWords + " Words");
-		}).keyup();
-	});
-	$( function() {
-		var availableTags = [
-		<?php 
-		for ($i = 0; $i < count($characters); $i++) {
-			if($i != count($characters) - 1) echo '"'.$characters[$i]->name.'", ';
-			else echo '"'.$characters[$i]->name.'"';
-		}
-		?>
-		];
-		function split( val ) {
-			return val.split( /,\s*/ );
-		}
-		function extractLast( term ) {
-			return split( term ).pop();
-		}
-
-		$( "#characters" )
-      // don't navigate away from the field on tab when selecting an item
-      .on( "keydown", function( event ) {
-      	if ( event.keyCode === $.ui.keyCode.TAB &&
-      		$( this ).autocomplete( "instance" ).menu.active ) {
-      		event.preventDefault();
-      }
-  })
-      .autocomplete({
-      	minLength: 0,
-      	source: function( request, response ) {
-          // delegate back to autocomplete, but extract the last term
-          response( $.ui.autocomplete.filter(
-          	availableTags, extractLast( request.term ) ) );
-      },
-      focus: function() {
-          // prevent value inserted on focus
-          return false;
-      },
-      select: function( event, ui ) {
-      	var terms = split( this.value );
-          // remove the current input
-          terms.pop();
-          // add the selected item
-          terms.push( ui.item.value );
-          // add placeholder to get the comma-and-space at the end
-          terms.push( "" );
-          this.value = terms.join( ", " );
-          return false;
-      }
-  });
-
-
-      var API = 'http://localhost:8088/Wordies/Dashboard/';
-      var dt = new Date();
-
-      function autosave() {
-
-      	var id = <?php echo $id; ?>;
-      	var content = $(".tinymce").html();
-      	var desc = $("#desc").val();
-      	var characters = $("#characters").val();
-      	$.ajax({
-      		type: "POST",
-      		data: {
-      			"id": id,
-      			"content": content,
-      			"desc": desc,
-      			"characters": characters,
-      			"word_count": iTotalWords
-      		},
-      		dataType: "json",
-      		url: API + "save_section",
-      		success: function(data) {
-      			UIkit.notification({
-				    message: 'Saved',
-				    status: 'primary',
-				    pos: 'top-right',
-				    timeout: 5000
-				});
-
-				$('.save').html("Last Autosaved on " + dt.toLocaleString());
-      		}
-      	});
-      }
-
-      $( "#btnSave" ).click(function() {
-      	autosave();
-      });
-
-      window.setInterval(function(){
-      	autosave();
-	}, 60000);
-  });
-</script>
 
 <div class="uk-margin-large-top uk-container uk-container-large">
 	<div id="dashboard-header" class="uk-margin-large-top uk-dark uk-background-muted uk-padding uk-text-center@s">
@@ -149,9 +41,128 @@
 			<div class="uk-text-right uk-text-small">
 				<span class="words"></span>
 			</div>
+
+			<input type="hidden" id="id" value="<?php echo $story[0]->id ?>">
 		</div>
 		<br>
 		<a class="uk-button uk-button-default" id="btnSave">Save</a>
 		<a class="uk-button uk-button-default" id="btnDelete">Delete</a>
 	</div>
 </div>
+
+
+<script>
+	var iTotalWords;
+	var id = $("#id").val();
+
+
+	var API = 'http://localhost:8088/Wordies/Dashboard/';
+	var dt = new Date();
+	var availableTags = [];
+	tinymce.init({
+		selector: 'div.tinymce',
+		theme: 'inlite',
+		plugins: 'link paste contextmenu textpattern autolink wordcount autoresize paste',
+		selection_toolbar: 'undo redo | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | h2 h3 blockquote',
+		inline: true
+	});
+
+	$(function() {
+		var wordCounts = {};
+		$("div.tinymce").keyup(function() {
+			iTotalWords = $("div.tinymce").text().split(' ').length;
+			$(".words").html(iTotalWords + " Words");
+		}).keyup();
+	});
+	$( function() {
+		$.ajax({
+			type: "GET",
+			dataType: "json",
+			url: API + "get_characters/" + id,
+			success: function(data) {
+				if(data.length > 0) {
+					console.log(data);
+					for(var i = 0; i < data.length; i++) {
+						availableTags.push(data[i].name);
+					}
+				}
+			}
+		});
+		function split( val ) {
+			return val.split( /,\s*/ );
+		}
+		function extractLast( term ) {
+			return split( term ).pop();
+		}
+
+		$( "#characters" )
+      // don't navigate away from the field on tab when selecting an item
+      .on( "keydown", function( event ) {
+      	if ( event.keyCode === $.ui.keyCode.TAB &&
+      		$( this ).autocomplete( "instance" ).menu.active ) {
+      		event.preventDefault();
+      }
+  })
+      .autocomplete({
+      	minLength: 0,
+      	source: function( request, response ) {
+          // delegate back to autocomplete, but extract the last term
+          response( $.ui.autocomplete.filter(
+          	availableTags, extractLast( request.term ) ) );
+      },
+      focus: function() {
+          // prevent value inserted on focus
+          return false;
+      },
+      select: function( event, ui ) {
+      	var terms = split( this.value );
+          // remove the current input
+          terms.pop();
+          // add the selected item
+          terms.push( ui.item.value );
+          // add placeholder to get the comma-and-space at the end
+          terms.push( "" );
+          this.value = terms.join( ", " );
+          return false;
+      }
+  });
+
+
+      function autosave() {
+
+      	var content = $(".tinymce").html();
+      	var desc = $("#desc").val();
+      	var characters = $("#characters").val();
+      	$.ajax({
+      		type: "POST",
+      		data: {
+      			"id": id,
+      			"content": content,
+      			"desc": desc,
+      			"characters": characters,
+      			"word_count": iTotalWords
+      		},
+      		dataType: "json",
+      		url: API + "save_section",
+      		success: function(data) {
+      			UIkit.notification({
+      				message: 'Saved',
+      				status: 'primary',
+      				pos: 'top-right',
+      				timeout: 5000
+      			});
+
+      			$('.save').html("Last Autosaved on " + dt.toLocaleString());
+      		}
+      	});
+      }
+
+      $( "#btnSave" ).click(function() {
+      	autosave();
+      });
+
+      window.setInterval(function(){
+      	autosave();
+      }, 60000);
+  });
+</script>

@@ -47,7 +47,6 @@
     <script src="<?=base_url();?>assets/js/uikit.min.js"></script>
     <script src="<?=base_url();?>assets/js/uikit-icons.min.js"></script>
     <script src="<?=base_url();?>assets/js/app.js"></script>
-    <script src="<?php echo base_url().'assets/js/app/'.$the_view ?>.js"></script>
     <link rel="stylesheet" href="<?=base_url();?>assets/css/uikit.css" />
     <link rel="stylesheet" href="<?=base_url();?>assets/css/app.css" />
     <link rel="icon" href="<?=base_url();?>assets/img/logo.png" sizes="any" type="image/png">

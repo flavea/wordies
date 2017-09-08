@@ -13,6 +13,8 @@
 	var API = 'http://localhost:8088/Wordies/Dashboard/';
 	var dt = new Date();
 
+	
+
 	function autosave() {
 
 		var id = <?php echo $id; ?>;
@@ -21,7 +23,7 @@
 		var characters = $("#characters").val();
 		$.ajax({
 			type: "POST",
-			data: 
+			data: {
 				"id": id,
 				"content": content,
 				"desc": desc,
@@ -80,9 +82,6 @@
 		</div>
 
 	</div>
-
-
-
 
 	<div id="chapter" class="uk-container uk-container-small uk-margin-large">
 		<a class="uk-button uk-button-default" id="btnSave">Save</a>
