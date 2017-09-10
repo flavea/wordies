@@ -17,16 +17,15 @@
 							<?php if($logged_in == true) { ?>
 							<li class="uk-active"><a href="<?= base_url('profile/'.$user_id)?>">My Profile</a></li>
 							<li><a href="<?= base_url('dashboard/')?>">My Dashboard</a></li>
-							<li><a href="#">Write a New Story</a></li>
-							<li><a href="#">Edit Profile</a></li>
-							<li class="uk-inline uk-display-block uk-hidden@m"><a href="#">Notifications <span class="uk-position-top-right uk-badge uk-float-right uk-margin-small-top"><small>10</small></span></a></li>
-							<li class="uk-inline uk-display-block uk-hidden@m"><a href="#">Messages <span class="uk-position-top-right uk-badge uk-float-right uk-margin-small-top"><small>10</small></span></a></li>
-							<li class="uk-inline uk-display-block uk-hidden@m"><a href="#">New Comments <span class="uk-position-top-right uk-badge uk-float-right uk-margin-small-top"><small>10</small></span></a></li>
+							<li><a href="<?= base_url('auth/edit_profile')?>">Edit Profile</a></li>
+							<li class="uk-inline uk-display-block uk-hidden@m"><a href="<?= base_url('notifications')?>">Notifications <span class="uk-position-top-right uk-badge uk-float-right uk-margin-small-top"><small>10</small></span></a></li>
+							<li class="uk-inline uk-display-block uk-hidden@m"><a href="<?= base_url('messages')?>">Messages <span class="uk-position-top-right uk-badge uk-float-right uk-margin-small-top"><small>10</small></span></a></li>
+							<li class="uk-inline uk-display-block uk-hidden@m"><a href="<?= base_url('dashboard/comments')?>">New Comments <span class="uk-position-top-right uk-badge uk-float-right uk-margin-small-top"><small>10</small></span></a></li>
 							<li class="uk-nav-divider"></li>
 							<li><a href="<?=base_url('auth/logout')?>">Log Out</a></li>
 							<?php } else { ?>
-							<li><a href="#">Login</a></li>
-							<li><a href="#">Register</a></li>
+							<li><a href="<?= base_url('auth/login')?>">Login</a></li>
+							<li><a href="<?= base_url('auth/register')?>">Register</a></li>
 							<?php } ?>
 
 
@@ -37,16 +36,16 @@
 					<a uk-icon="icon: menu" class="uk-margin-small-right" href="#"></a>
 					<div class="uk-navbar-dropdown">
 						<ul class="uk-nav uk-navbar-dropdown-nav">
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Stories</a></li>
-							<li><a href="#">Authors</a></li>
-							<li><a href="#">Informations</a></li>
-							<li><a href="#">Wordies</a></li>
+							<li><a href="<?= base_url()?>">Home</a></li>
+							<li><a href="<?= base_url('stories')?>">Stories</a></li>
+							<li><a href="<?= base_url('authors')?>">Authors</a></li>
+							<li><a href="<?= base_url('informations')?>">Informations</a></li>
+							<li><a href="<?= base_url('wordies')?>">Wordies</a></li>
 
 						</ul>
 					</div>
 				</li>
-				<li class="uk-active uk-visible@m"><a href="#">Home</a></li>
+				<li class="uk-active uk-visible@m"><a href="/">Home</a></li>
 				<li class="uk-visible@m">
 					<a href="#">Stories <span uk-icon="icon: chevron-down;" class="uk-margin-small-left"></span></a>
 					<div class="uk-navbar-dropdown uk-navbar-dropdown-width-4">

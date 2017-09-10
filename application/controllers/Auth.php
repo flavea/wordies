@@ -50,9 +50,7 @@ class Auth extends MY_Controller {
 		$this->data['title'] = $this->lang->line('login_heading');
 
 		//validate form input
-		$this->form_validation->set_rules('identity', str_replace(':', '', $this->lang->line('login_identity_label')), 'required');
-		$this->form_validation->set_rules('password', str_replace(':', '', $this->lang->line('login_password_label')), 'required');
-
+		$this->form_validation->set_rules('identity', 'Username', 'required');
 		if ($this->form_validation->run() == true)
 		{
 			// check to see if the user is logging in
@@ -63,6 +61,8 @@ class Auth extends MY_Controller {
 			{
 				//if the login is successful
 				//redirect them back to the home page
+				//
+				//print_r($this->ion_auth->messages());die();
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
 				redirect('/', 'refresh');
 			}
@@ -70,6 +70,7 @@ class Auth extends MY_Controller {
 			{
 				// if the login was un-successful
 				// redirect them back to the login page
+				//print_r($this->ion_auth->errors());die();
 				$this->session->set_flashdata('message', $this->ion_auth->errors());
 				redirect('auth/login', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
 			}
@@ -499,9 +500,14 @@ class Auth extends MY_Controller {
 	}
 
 	// edit a user
-	public function edit_user($id)
+	public function edit_profile($id = null)
 	{
 		$this->data['title'] = $this->lang->line('edit_user_heading');
+
+
+		if($id == null) {
+			$id = $this->ion_auth->user()->row()->id;
+		}
 
 		if (!$this->ion_auth->logged_in() || (!$this->ion_auth->is_admin() && !($this->ion_auth->user()->row()->id == $id)))
 		{

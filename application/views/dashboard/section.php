@@ -15,7 +15,7 @@
 	<div id="chapter" class="uk-container uk-container-small uk-margin-large">
 
 		
-		<a class="uk-button uk-button-default" id="btnSave">Save</a>
+		<a class="uk-button uk-button-default btnSave" id="btnSave">Save</a>
 		<a class="uk-button uk-button-default" id="btnDelete">Delete</a>
 
 		<div class="uk-margin-small-top">
@@ -45,7 +45,7 @@
 			<input type="hidden" id="id" value="<?php echo $story[0]->id ?>">
 		</div>
 		<br>
-		<a class="uk-button uk-button-default" id="btnSave">Save</a>
+		<a class="uk-button uk-button-default btnSave" id="btnSave">Save</a>
 		<a class="uk-button uk-button-default" id="btnDelete">Delete</a>
 	</div>
 </div>
@@ -55,8 +55,6 @@
 	var iTotalWords;
 	var id = $("#id").val();
 
-
-	var API = 'http://localhost:8088/Wordies/Dashboard/';
 	var dt = new Date();
 	var availableTags = [];
 	tinymce.init({
@@ -78,7 +76,7 @@
 		$.ajax({
 			type: "GET",
 			dataType: "json",
-			url: API + "get_characters/" + id,
+			url: getBaseURL() + "dashboard/get_characters/" + id,
 			success: function(data) {
 				if(data.length > 0) {
 					console.log(data);
@@ -143,7 +141,7 @@
       			"word_count": iTotalWords
       		},
       		dataType: "json",
-      		url: API + "save_section",
+      		url: getBaseURL() + "dashboard/save_section",
       		success: function(data) {
       			UIkit.notification({
       				message: 'Saved',
@@ -157,12 +155,14 @@
       	});
       }
 
-      $( "#btnSave" ).click(function() {
-      	autosave();
-      });
 
       window.setInterval(function(){
       	autosave();
       }, 60000);
+
+
+      $( ".btnSave" ).click(function() {
+      	autosave();
+      });
   });
 </script>

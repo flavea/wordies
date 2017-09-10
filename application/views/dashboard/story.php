@@ -3,7 +3,7 @@
  <div id="dashboard-header" class="uk-dark uk-background-muted uk-padding">
 
     <?php if($story[0]->cover != null) { ?>
-    <img class="uk-align-left" src="<?php echo $story[0]->cover ?>" alt="">
+    <img class="uk-align-left" src="<?php echo $story[0]->cover ?>" alt="" width="150">
     <?php } else { ?>
     <img class="uk-align-left" src="https://placehold.it/150x220" alt="">
     <?php } ?>

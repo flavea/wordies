@@ -107,6 +107,7 @@ footer {
 
 .label {
 	font-family: 'Libre Baskerville', serif;
+	display: block;
 }
 
 .summary-box h2 {

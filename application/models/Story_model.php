@@ -44,4 +44,14 @@ class Story_model extends CI_Model
 		$query = $this->db->get('comments');
 		return $query->result();
 	}
+
+
+	public function get_relations($id) {
+		$this->db->where('character_relations.char1', $id);
+		$this->db->join('characters', 'characters.id = character_relations.char2');
+		$this->db->select('character_relations.id, character_relations.desc, characters.name');
+		$this->db->from('character_relations');
+		$query = $this->db->get();
+		return $query->result();
+	}
 }

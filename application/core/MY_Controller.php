@@ -9,6 +9,7 @@ class MY_Controller extends CI_Controller {
       parent::__construct();
       $this->load->model('Basic_model');
       $this->data['logged_in'] = $this->ion_auth->logged_in();
+      $this->data['username'] = "Guest";
       if($this->data['logged_in']) {
         $this->data['user'] = $this->ion_auth->user()->row();
         $this->data['user_id'] = $this->data['user']->id;
