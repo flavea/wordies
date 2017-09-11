@@ -1,6 +1,6 @@
  
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=65pj8yn21zggc1ysu5bfgkk2l45vne0mn4fj3tcgh1lr0a8n"></script>
 
 <div class="uk-margin-large-top uk-container uk-container-large">
 	<div id="dashboard-header" class="uk-margin-large-top uk-dark uk-background-muted uk-padding uk-text-center@s">
@@ -41,8 +41,9 @@
 			<div class="uk-text-right uk-text-small">
 				<span class="words"></span>
 			</div>
+			<input type="hidden" id="id" value="<?php echo $id ?>">
 
-			<input type="hidden" id="id" value="<?php echo $story[0]->id ?>">
+			<input type="hidden" id="story_id" value="<?php echo $story[0]->id ?>">
 		</div>
 		<br>
 		<a class="uk-button uk-button-default btnSave" id="btnSave">Save</a>
@@ -54,6 +55,7 @@
 <script>
 	var iTotalWords;
 	var id = $("#id").val();
+	var story_id = $("#story_id").val();
 
 	var dt = new Date();
 	var availableTags = [];
@@ -76,7 +78,7 @@
 		$.ajax({
 			type: "GET",
 			dataType: "json",
-			url: getBaseURL() + "dashboard/get_characters/" + id,
+			url: getBaseURL() + "dashboard/get_characters/" + story_id,
 			success: function(data) {
 				if(data.length > 0) {
 					console.log(data);

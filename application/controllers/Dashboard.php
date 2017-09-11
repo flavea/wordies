@@ -9,6 +9,7 @@ class Dashboard extends MY_Controller {
 
 	public function index() {
 		$this->data['stories'] = $this->Story_model->get_user_stories($this->data['user_id']);
+		$this->data['shared'] = $this->Story_model->get_shared_stories($this->data['user_id']);
 		$this->render('dashboard','profile', 'Dashboard');
 	}
 
@@ -25,6 +26,7 @@ class Dashboard extends MY_Controller {
 			$user_id = $this->ion_auth->user()->row()->id;
 			$title   = $this->input->post('title');
 			$status  = $this->input->post('status');
+			$cover   = $this->input->post('cover');
 			$type    = $this->input->post('type');
 			$genre   = $this->input->post('genre');
 			$rating  = $this->input->post('rating');
@@ -33,6 +35,7 @@ class Dashboard extends MY_Controller {
 			$data = array(
 				'title'     => $title,
 				'status_id' => $status,
+				'cover'     => $cover,
 				'type_id'   => $type,
 				'genre_id'  => $genre,
 				'rating_id' => $rating,
@@ -83,7 +86,7 @@ class Dashboard extends MY_Controller {
 					'user_up'   => $user_id
 					);
 
-				$id = $this->Basic_model->update('stories', $data, $where);
+				$this->Basic_model->update('stories', $data, $where);
 				redirect('dashboard/edit_story/'.$id);
 
 			} else {
@@ -180,30 +183,12 @@ class Dashboard extends MY_Controller {
 		}
 	}
 
-	public function delete_chapter() {
-		if (!$this->ion_auth->logged_in()) {
-			redirect("login");
-		} 
-		else {
-			$id = $this->input->post('id');
-
-			$where = array(
-				'id'    => $id
-				);
-
-			$chapter = $this->Basic_model->simple_select('chapter', array('id' => $id));
-			$this->Basic_model->delete('sections', array('chapter_id' => $id));
-			$this->Basic_model->delete('chapters', $where);
-			echo json_encode(array("id" => $chapter[0]->story_id));
-		}
-	}
-
 
 
 	public function get_characters($id) {
 
 		$this->data['id'] = $id;
-		$characters = $this->Basic_model->simple_select('characters', array('story_id' => $id), 'name');
+		$characters = $this->Basic_model->simple_select('characters', array('story_id' => $id), 'id, name');
 		$this->data['story'] = $this->Basic_model->simple_select('stories', array('id' => $id));
 
 		if($this->data['story'][0]->author_id != $this->ion_auth->user()->row()->id) {
@@ -297,38 +282,27 @@ class Dashboard extends MY_Controller {
 		}
 	}
 
-	public function delete_character() {
-		if (!$this->ion_auth->logged_in()) {
-			redirect("login");
-		} 
-		else {
-			$id         = $this->input->post('id');
 
-			$where = array(
-				'id'    => $id
-				);
-
-			$character = $this->Basic_model->simple_select('characters', array('id' => $id));
-
-			$res = $this->Basic_model->delete('characters', $where);
-			echo json_encode(array("id" => $character[0]->story_id));
+	public function relation($id) {
+		$this->data['id'] = $id;
+		$this->data['relation'] = $this->Basic_model->simple_select('character_relations', array('id' => $id));
+		$char = $this->Basic_model->simple_select('characters', array('id' => $this->data['relation'][0]->char1));
+		$this->data['story'] = $this->Basic_model->simple_select('stories', array('id' => $char[0]->story_id));
+		if($this->data['story'][0]->author_id != $this->ion_auth->user()->row()->id) {
+			show_404();
+		} else {
+			$this->render('relation','basic', 'Dashboard');
 		}
 	}
 
-
 	public function new_relation() {
 		
-		$this->load->helper('form');
-		$this->load->library(array(
-			'form_validation'
-			));
-		$this->form_validation->set_rules('desc', 'desc', 'required');
-		if (!$this->ion_auth->logged_in() || $this->form_validation->run() == FALSE) {
+		if (!$this->ion_auth->logged_in()) {
 			show_404();
 		} else {
 			$user_id   = $this->ion_auth->user()->row()->id;
-			$id        = $this->input->post('id');
-			$character = $this->input->post('character');
+			$id        = $this->input->post('char1');
+			$character = $this->input->post('char2');
 			$desc      = $this->input->post('desc');
 
 			$data = array(
@@ -337,8 +311,29 @@ class Dashboard extends MY_Controller {
 				'desc'  => $desc,
 				);
 
-			$id = $this->Basic_model->insert('character_relations', $data);
-			redirect('dashboard/character/'.$id);
+			$this->Basic_model->insert('character_relations', $data);
+			echo json_encode(array("id" => $id));
+		}
+	}
+
+	public function update_relation() {
+		
+		if (!$this->ion_auth->logged_in()) {
+			show_404();
+		} else {
+			$id        = $this->input->post('id');
+			$character = $this->input->post('char2');
+			$desc      = $this->input->post('desc');
+
+			$where = array('id' => $id);
+
+			$data = array(
+				'char2' => $character,
+				'desc'  => $desc,
+				);
+
+			$this->Basic_model->update('character_relations', $data, $where);
+			echo json_encode(array("id" => $id));
 		}
 	}
 
@@ -368,6 +363,46 @@ class Dashboard extends MY_Controller {
 
 			$id = $this->Basic_model->insert('resources', $data);
 			redirect('dashboard/story/'.$story_id);
+		}
+	}
+
+
+	public function update_resource($id) {
+		
+		$this->load->helper('form');
+		$this->load->library(array(
+			'form_validation'
+			));
+		$this->form_validation->set_rules('title', 'Title', 'required');
+
+		$this->data['id'] = $id;
+		$this->data['resource'] = $this->Basic_model->simple_select('resources', array('id' => $id));
+		$story_id = $this->data['resource'][0]->story_id;
+		$this->data['story'] = $this->Basic_model->simple_select('stories', array('id' => $story_id));
+
+		if (!$this->ion_auth->logged_in()) {
+			show_404();
+		} else {
+			if($this->form_validation->run() == FALSE) {
+				$this->render('resources', 'basic', 'dashboard');
+			} else {
+				$user_id  = $this->ion_auth->user()->row()->id;
+				$id    	  = $this->input->post('id');
+				$title    = $this->input->post('title');
+				$link     = $this->input->post('link');
+				$desc     = $this->input->post('desc');
+
+				$where = array('id' => $id);
+
+				$data = array(
+					'name'        => $title,
+					'link'        => $link,
+					'description' => $desc
+					);
+
+				$id = $this->Basic_model->update('resources', $data, $where);
+				redirect('dashboard/story/'.$story_id);
+			}
 		}
 	}
 
@@ -446,42 +481,76 @@ class Dashboard extends MY_Controller {
 	}
 
 
+	public function delete_story() {
+		if (!$this->ion_auth->logged_in()) {
+			redirect("login");
+		} 
+		else {
+			$id = $this->input->post('id');
+			$this->Basic_model->delete('stories', array('id'=> $id));
+			$this->Basic_model->delete('chapters', array('story_id'=> $id));
+			$this->Basic_model->delete('resources', array('story_id'=> $id));
+			$this->Basic_model->delete('characters', array('story_id'=> $id));
+			echo json_encode(array("url" => base_url('dashboard')));
+		}
+	}
 
+	public function delete_chapter() {
+		if (!$this->ion_auth->logged_in()) {
+			redirect("login");
+		} 
+		else {
+			$id = $this->input->post('id');
+			$this->Basic_model->delete('chapters', array('id'=> $id));
+			$this->Basic_model->delete('sections', array('chapter_id'=> $id));
+			echo json_encode(array("status" => "ok"));
+		}
+	}
+
+	public function delete_character() {
+		if (!$this->ion_auth->logged_in()) {
+			redirect("login");
+		} 
+		else {
+			$id = $this->input->post('id');
+			$this->Basic_model->delete('characters', array('id'=> $id));
+			$this->Basic_model->delete('character_relations', array('char1'=> $id));
+			$this->Basic_model->delete('character_relations', array('char2'=> $id));
+			echo json_encode(array("status" => "ok"));
+		}
+	}
+
+	public function delete_resource() {
+		if (!$this->ion_auth->logged_in()) {
+			redirect("login");
+		} 
+		else {
+			$id = $this->input->post('id');
+			$this->Basic_model->delete('resources', array('id'=> $id));
+			echo json_encode(array("status" => "ok"));
+		}
+	}
 
 	public function delete_section() {
 		if (!$this->ion_auth->logged_in()) {
 			redirect("login");
 		} 
 		else {
-			$id         = $this->input->post('id');
-
-			$where = array(
-				'id'    => $id
-				);
-
-			$section = $this->Basic_model->simple_select('sections', array('id' => $id));
-
-			$res = $this->Basic_model->delete('sections', $where);
-			echo json_encode(array("id" => $section[0]->chapter_id));
+			$id = $this->input->post('id');
+			$this->Basic_model->delete('sections', array('id'=> $id));
+			echo json_encode(array("status" => "ok"));
 		}
 	}
 
-
-	public function delete_story() {
+	public function delete_relation() {
 		if (!$this->ion_auth->logged_in()) {
 			redirect("login");
 		} 
 		else {
-			$id         = $this->input->post('id');
-
-			$where = array(
-				'id'    => $id
-				);
-
-			$section = $this->Basic_model->simple_select('sections', array('id' => $id));
-
-			$res = $this->Basic_model->delete('sections', $where);
-			echo json_encode(array("id" => $section[0]->chapter_id));
+			$id = $this->input->post('id');
+			$this->Basic_model->delete('character_relations', array('id'=> $id));
+			echo json_encode(array("status" => "ok"));
 		}
 	}
+
 }

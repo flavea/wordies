@@ -1,11 +1,6 @@
 
 $(document).ready(function(){
 
-
-	$("body").niceScroll({
-		cursoropacitymin:0.4,
-		autohidemode:'leave'
-	}); 	
     
     var getMax = function(){
         return $(document).height() - $(window).height();

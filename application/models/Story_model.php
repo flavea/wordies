@@ -54,4 +54,13 @@ class Story_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+
+	public function get_shared_stories($id) {
+		$this->db->where('share_mapping.user_id', $id);
+		$this->db->join('stories', 'share_mapping.story_id = stories.id');
+		$this->db->select('*');
+		$this->db->from('share_mapping');
+		$query = $this->db->get();
+		return $query->result();
+	}
 }

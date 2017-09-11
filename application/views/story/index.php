@@ -3,7 +3,7 @@
 <div id="story" class="uk-child-width-1-1@s uk-child-width-1-2@m" uk-grid>
 
 	<div class="uk-inline uk-width-1-1@s uk-hidden@m">
-		<img src="http://i.imgur.com/QVAgcLa.jpg" width="100%">
+		<img src="<?php echo $story[0]->cover; ?>" width="100%">
 	</div>
 
 
@@ -21,21 +21,34 @@
 				</div>
 
 				<small class="label"><i>A Historical Fiction by flavea</i></small>
-				<div id="story-title"><h1>When The Cold Wind Blows</h1></div>
+				<div id="story-title"><h1><?php echo $story[0]->title; ?></h1></div>
 				<div class="info"><b>Updated:</b> Aug 25, 2017</div>
 				<div class="info"><b>Rating:</b> T+</div>
 				<div class="info"><b>Word Count:</b> 2000</div>
 				<div class="info"><b>Complete:</b> No</div>
 				<div class="info"><b>Subscribers:</b> 0</div>
 				<div class="info"><b>Votes:</b> 0</div>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Orci a scelerisque purus semper eget duis. Lorem donec massa sapien faucibus et. Non tellus orci ac auctor augue mauris. Suspendisse faucibus interdum posuere lorem ipsum dolor sit.</p>
+				<p><?php echo $story[0]->desc; ?></p>
 
 
 				<h2 class="category-title uk-margin-small-top"><span>Chapters</span></h2>
 				<div id="chapters">
-		 			<a class="uk-display-block uk-button uk-button-text uk-text-left"><h3 class="uk-text-uppercase"><span class="uk-margin-large-right">01.</span> Prolog</h3></a>
-		 			<a class="uk-display-block uk-button uk-button-text uk-text-left"><h3 class="uk-text-uppercase"><span class="uk-margin-large-right">02.</span> The Wind That Blows Me Towards You</h3></a>
-		 			<a class="uk-display-block uk-button uk-button-text uk-text-left"><h3 class="uk-text-uppercase"><span class="uk-margin-large-right">03.</span> And The Wind Stops Blowing</h3></a>
+					<?php if(isset($chapters) && $chapters != null) {
+						for($i = 0; $i < count($chapters); $i++) {
+							?>
+							<a class="uk-display-block uk-button uk-button-text uk-text-left" href="<?= base_url('stories/story/'.$story[0]->id.'/'.($i+1)) ?>">
+								<h3 class="uk-text-uppercase">
+									<span class="uk-margin-large-right">
+										<?php if ($i < 10) echo "0".($i+1).".";
+										else echo ($i+1)."."; ?>
+									</span> 
+									<?php echo $chapters[$i]->title ?>
+								</h3>
+							</a>
+							<?php
+						}
+					}
+					?>
 				</div>
 			</div>
 		</div>

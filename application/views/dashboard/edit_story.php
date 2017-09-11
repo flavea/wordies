@@ -1,32 +1,7 @@
 <?php if(isset($story) && $story != null) {?>
 <div class="uk-margin-xlarge-top uk-container uk-container-large">
- <div id="dashboard-header" class="uk-dark uk-background-muted uk-padding">
-
-    <?php if($story[0]->cover != null) { ?>
-    <img class="uk-align-left" src="<?php echo $story[0]->cover ?>" alt="" width="150">
-    <?php } else { ?>
-    <img class="uk-align-left" src="https://placehold.it/150x220" alt="">
-    <?php } ?>
-
-    <h2 class="uk-margin-remove uk-margin-small-top">
-       <?php echo $story[0]->title ?>
-   </h2>
-
-   <p class="uk-margin-small-top uk-width-xlarge uk-text-small"><?php echo $story[0]->desc ?></p>
-
-   <a class="uk-button uk-button-secondary uk-margin-small-top">Edit Info</a>
-   <a class="uk-button uk-button-secondary uk-margin-small-top">Add Tags</a>
-   <a class="uk-button uk-button-secondary uk-margin-small-top" uk-toggle="target: #share">Share</a>
-   <a class="uk-button uk-button-secondary uk-margin-small-top">Delete</a>
-   <a class="uk-button uk-button-secondary uk-margin-small-top">PDF</a>
-
-   <div class="uk-position-right uk-margin-large-right uk-flex uk-flex-middle uk-visible@l">
-       <div class="uk-padding-small uk-text-uppercase"><h1 class="uk-margin-remove">2</h1>Chapters</div>
-       <div class="uk-padding-small uk-text-uppercase"><h1 class="uk-margin-remove">2</h1>Characters</div>
-       <div class="uk-padding-small uk-text-uppercase"><h1 class="uk-margin-remove">2</h1>Comments</div>
-   </div>
-
-</div>
+ 
+<?php $this->load->view('dashboard/story_header');?>
 
 
 	<div id="chapter" class="uk-container uk-container-small uk-margin-large">
