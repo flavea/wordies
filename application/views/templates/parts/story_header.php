@@ -3,17 +3,22 @@
 	<a class="uk-background-default uk-padding-small" uk-icon="icon:menu;ratio:1" href=""></a>
 	<div uk-dropdown>
 		<ul class="uk-nav uk-navbar-dropdown-nav">
-			<li><a href="#">Home</a></li>
-			<li><a href="#">Dashboard</a></li>
-			<li><a href="#">Stories</a></li>
-			<li><a href="#">Authors</a></li>
-			<li><a href="#">My Profile</a></li>
-			<li><a href="#">Edit Profile</a></li>
-			<li class="uk-inline uk-display-block"><a href="#">Notifications <span class="uk-position-top-right uk-badge uk-float-right uk-margin-small-top"><small>10</small></span></a></li>
-			<li class="uk-inline uk-display-block"><a href="#">Messages <span class="uk-position-top-right uk-badge uk-float-right uk-margin-small-top"><small>10</small></span></a></li>
-			<li class="uk-inline uk-display-block"><a href="#">New Comments <span class="uk-position-top-right uk-badge uk-float-right uk-margin-small-top"><small>10</small></span></a></li>
+			<li><a href="<?= base_url()?>">Home</a></li>
+			<li><a href="<?= base_url('stories')?>">Stories</a></li>
+			<li><a href="<?= base_url('authors')?>">Authors</a></li>
+			<?php if($logged_in == true) { ?>
+			<li><a href="<?= base_url('author/'.$user_id)?>">My Profile</a></li>
+			<li><a href="<?= base_url('dashboard/')?>">My Dashboard</a></li>
+			<li><a href="<?= base_url('auth/edit_profile')?>">Edit Profile</a></li>
+			<li class="uk-inline uk-display-block uk-hidden@m"><a href="<?= base_url('notifications')?>">Notifications <span class="cnotif uk-position-top-right uk-badge uk-float-right uk-margin-small-top uk-hidden"></span></a></li>
+			<li class="uk-inline uk-display-block uk-hidden@m"><a href="<?= base_url('messages')?>">Messages <span class="cmessage uk-position-top-right uk-badge uk-float-right uk-margin-small-top uk-hidden"></span></a></li>
+			<li class="uk-inline uk-display-block uk-hidden@m"><a href="<?= base_url('dashboard/comments')?>">New Comments <span class="ccomment uk-position-top-right uk-badge uk-float-right uk-margin-small-top uk-hidden"></span></a></li>
 			<li class="uk-nav-divider"></li>
-			<li><a href="#">Logout</a></li>
+			<li><a href="<?=base_url('auth/logout')?>">Log Out</a></li>
+			<?php } else { ?>
+			<li><a href="<?= base_url('auth/login')?>">Login</a></li>
+			<li><a href="<?= base_url('auth/register')?>">Register</a></li>
+			<?php } ?>
 		</ul>
 	</div>
 </div>

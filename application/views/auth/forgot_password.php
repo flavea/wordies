@@ -4,7 +4,12 @@
 <h1><?php echo lang('forgot_password_heading');?></h1>
 <p><?php echo sprintf(lang('forgot_password_subheading'), $identity_label);?></p>
 
-<div id="infoMessage"><?php echo $message;?></div>
+<?php if($message != null) { ?>
+    <div class="uk-alert-danger" uk-alert>
+    <a class="uk-alert-close" uk-close></a>
+      <?php echo $message;?>
+      </div>
+      <?php } ?>
 
 <?php echo form_open("auth/forgot_password");?>
 

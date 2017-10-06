@@ -1,7 +1,12 @@
 <h1><?php echo lang('create_group_heading');?></h1>
 <p><?php echo lang('create_group_subheading');?></p>
 
-<div id="infoMessage"><?php echo $message;?></div>
+<?php if($message != null) { ?>
+    <div class="uk-alert-danger" uk-alert>
+    <a class="uk-alert-close" uk-close></a>
+      <?php echo $message;?>
+      </div>
+      <?php } ?>
 
 <?php echo form_open("auth/create_group");?>
 

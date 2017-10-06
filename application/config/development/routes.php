@@ -50,3 +50,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'master/index';
+$route['types'] = 'master/types';
+$route['ratings'] = 'master/ratings';
+$route['genres'] = 'master/genres';
+$route['authors'] = 'master/authors';
+$route['author/(:any)'] = 'profile/index/$1';
+$route['author/(:any)/followers'] = 'profile/followers/$1';
+$route['author/(:any)/following'] = 'profile/following/$1';
+$route['author/(:any)/recommendations'] = 'profile/recommendations/$1';
+$route['author/(:any)/subscriptions'] = 'profile/subscriptions/$1';
+$route['author/(:any)/comments'] = 'profile/comments/$1';
+$route['story/(:any)'] = 'stories/story/$1';
+$route['story/(:any)/(:any)'] = 'stories/story/$1/$2';
+$route['comment/(:any)'] = 'comment/$1';
+$route['comment/(:any)'] = 'comment/$1';
+$route['manage/(:any)'] = 'dashboard/story/$1';
+$route['manage/(:any)/edit'] = 'dashboard/edit_story/$1';
+$route['chapter/(:any)'] = 'dashboard/chapter/$1';
+$route['character/(:any)'] = 'dashboard/character/$1';
+$route['relationship/(:any)'] = 'dashboard/relation/$1';
+$route['resource/(:any)'] = 'dashboard/update_resource/$1';
+$route['section/(:any)'] = 'dashboard/section/$1';
+$route['message/(:any)'] = 'messages/message/$1';
+$route['new_message/(:any)'] = 'messages/new_message/$1';

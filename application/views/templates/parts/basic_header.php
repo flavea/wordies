@@ -8,19 +8,19 @@
 
 				<a href="#">
 					<div class="uk-inline small-icon uk-margin-small-right uk-border-circle">
-						<span class="uk-position-top-right uk-badge uk-badge-custom uk-hidden@m">10</span>
-						<img src="http://placeholder.it/20x20">
+						<span class="ctotal uk-position-top-right uk-badge uk-badge-custom uk-hidden@m"></span>
+						<img src="<?php echo $img ?>" class="uk-margin-remove uk-border-circle">
 					</div>
-					<span class="uk-visible@m">Hello, <?php echo $username ?></span> <span uk-icon="icon: chevron-down;" class="uk-margin-small-left@m"></span></a>
+					<span class="uk-visible@m"><?php echo $username ?></span> <span uk-icon="icon: chevron-down;" class="uk-margin-small-left@m"></span></a>
 					<div class="uk-navbar-dropdown">
 						<ul class="uk-nav uk-navbar-dropdown-nav">
 							<?php if($logged_in == true) { ?>
-							<li class="uk-active"><a href="<?= base_url('profile/'.$user_id)?>">My Profile</a></li>
+							<li><a href="<?= base_url('author/'.$user_id)?>">My Profile</a></li>
 							<li><a href="<?= base_url('dashboard/')?>">My Dashboard</a></li>
 							<li><a href="<?= base_url('auth/edit_profile')?>">Edit Profile</a></li>
-							<li class="uk-inline uk-display-block uk-hidden@m"><a href="<?= base_url('notifications')?>">Notifications <span class="uk-position-top-right uk-badge uk-float-right uk-margin-small-top"><small>10</small></span></a></li>
-							<li class="uk-inline uk-display-block uk-hidden@m"><a href="<?= base_url('messages')?>">Messages <span class="uk-position-top-right uk-badge uk-float-right uk-margin-small-top"><small>10</small></span></a></li>
-							<li class="uk-inline uk-display-block uk-hidden@m"><a href="<?= base_url('dashboard/comments')?>">New Comments <span class="uk-position-top-right uk-badge uk-float-right uk-margin-small-top"><small>10</small></span></a></li>
+							<li class="uk-inline uk-display-block uk-hidden@m"><a href="<?= base_url('notifications')?>">Notifications <span class="cnotif uk-position-top-right uk-badge uk-float-right uk-margin-small-top uk-hidden"></span></a></li>
+							<li class="uk-inline uk-display-block uk-hidden@m"><a href="<?= base_url('messages')?>">Messages <span class="cmessage uk-position-top-right uk-badge uk-float-right uk-margin-small-top uk-hidden"></span></a></li>
+							<li class="uk-inline uk-display-block uk-hidden@m"><a href="<?= base_url('dashboard/comments')?>">New Comments <span class="ccomment uk-position-top-right uk-badge uk-float-right uk-margin-small-top uk-hidden"></span></a></li>
 							<li class="uk-nav-divider"></li>
 							<li><a href="<?=base_url('auth/logout')?>">Log Out</a></li>
 							<?php } else { ?>
@@ -45,40 +45,30 @@
 						</ul>
 					</div>
 				</li>
-				<li class="uk-active uk-visible@m"><a href="/">Home</a></li>
+				<li class="uk-active uk-visible@m"><a href="<?= base_url()?>">Home</a></li>
 				<li class="uk-visible@m">
 					<a href="#">Stories <span uk-icon="icon: chevron-down;" class="uk-margin-small-left"></span></a>
-					<div class="uk-navbar-dropdown uk-navbar-dropdown-width-4">
-						<div class="uk-navbar-dropdown-grid uk-child-width-1-4" uk-grid>
+					<div class="uk-navbar-dropdown uk-navbar-dropdown-width-3">
+						<div class="uk-navbar-dropdown-grid uk-child-width-1-3" uk-grid>
 							<div>
 								<ul class="uk-nav uk-navbar-dropdown-nav">
-									<li><a href="#">Newest Stories</a></li>
-									<li><a href="#">Most Favorited Stories</a></li>
-									<li><a href="#">Most Subscribed Stories</a></li>
-									<li><a href="#">Most Commented</a></li>
+									<li><a href="<?= base_url('stories')?>">All Stories</a></li>
 									<li class="uk-nav-header">Type</li>
 									<?php
 										if(ISSET($types) && $types != null) {
 											foreach ($types as $t) {
 									?>
-										<li><a href="#"><?php echo $t->category_name ?></a></li>
+										<li><a href="<?= base_url('stories/index/0/'.$t->category_id) ?>"><?php echo $t->category_name ?></a></li>
 									<?php
 											}
 										}
 									?>
-								</ul>
-							</div>
-							<div>
-								<ul class="uk-nav uk-navbar-dropdown-nav">
-									<li class="uk-nav-header">Status</li>
-									<li><a href="#">Completed</a></li>
-									<li><a href="#">Not Completed</a></li>
 									<li class="uk-nav-header">Rating</li>
 									<?php
 										if(ISSET($ratings) && $ratings != null) {
 											foreach ($ratings as $r) {
 									?>
-										<li><a href="#"><?php echo $r->rating_name ?></a></li>
+										<li><a href="<?= base_url('stories/index/0/0/'.$r->rating_id) ?>"><?php echo $r->rating_name ?></a></li>
 									<?php
 											}
 										}
@@ -93,7 +83,7 @@
 										if(ISSET($genres) && $genres != null) {
 											for($i = 0; $i < count($genres)/2; $i++) {
 									?>
-										<li><a href="#"><?php echo $genres[$i]->genre_name ?></a></li>
+										<li><a href="<?= base_url('stories/index/0/0/0/'.$genres[$i]->genre_id) ?>"><?php echo $genres[$i]->genre_name ?></a></li>
 									<?php
 											}
 										}
@@ -108,7 +98,7 @@
 										if(ISSET($genres) && $genres != null) {
 											for($i = count($genres)/2; $i < count($genres); $i++) {
 									?>
-										<li><a href="#"><?php echo $genres[$i]->genre_name ?></a></li>
+										<li><a href="<?= base_url('stories/index/0/0/0/'.$genres[$i]->genre_id) ?>"><?php echo $genres[$i]->genre_name ?></a></li>
 									<?php
 											}
 										}
@@ -119,25 +109,19 @@
 					</div>
 				</li>
 				<li class="uk-visible@m">
-					<a href="#">Authors <span uk-icon="icon: chevron-down;" class="uk-margin-small-left"></span></a>
-					<div class="uk-navbar-dropdown">
-						<ul class="uk-nav uk-navbar-dropdown-nav">
-							<li><a href="#">By Alphabet</a></li>
-							<li><a href="#">By Number of Stories</a></li>
-							<li><a href="#">Most Followed</a></li>
-							<li><a href="#">Most Favorited</a></li>
-						</ul>
-					</div>
+					<a href="<?= base_url('authors') ?>">Authors <span uk-icon="icon: chevron-down;" class="uk-margin-small-left"></span></a>
 				</li>
 				<li class="uk-visible@l">
 					<a href="#">Informations <span uk-icon="icon: chevron-down;" class="uk-margin-small-left"></span></a>
 					<div class="uk-navbar-dropdown">
 						<ul class="uk-nav uk-navbar-dropdown-nav">
-							<li><a href="#">Genres</a></li>
-							<li><a href="#">Ratings</a></li>
+							<li><a href="<?= base_url('types')?>">Story Types</a></li>
+							<li><a href="<?= base_url('genres')?>">Genres</a></li>
+							<li><a href="<?= base_url('ratings')?>">Ratings</a></li>
 						</ul>
 					</div>
 				</li>
+				<!--
 				<li class="uk-visible@l">
 					<a href="#">Wordies <span uk-icon="icon: chevron-down;" class="uk-margin-small-left"></span></a>
 					<div class="uk-navbar-dropdown">
@@ -149,6 +133,7 @@
 						</ul>
 					</div>
 				</li>
+				-->
 			</ul>
 
 		</div>
@@ -158,8 +143,8 @@
 				<li>
 
 					<form class="uk-search uk-search-default">
-						<a href="" class="uk-search-icon-flip" uk-search-icon></a>
-						<input class="uk-search-input" type="search" placeholder="Search...">
+						<a class="uk-search-icon-flip" id="search-button" uk-search-icon></a>
+						<input class="uk-search-input" type="search" id="search-input" placeholder="Search...">
 					</form>
 				</li>
 
@@ -169,43 +154,55 @@
 					<a href="#" uk-icon="icon: mail"></a>
 					<div class="uk-navbar-dropdown uk-navbar-dropdown-width-2" uk-dropdown>
 						<ul class="uk-nav uk-navbar-dropdown-nav">
-							<li class="uk-active"><a href="#">Active</a></li>
-							<li><a href="#">Item</a></li>
-							<li class="uk-nav-header">Header</li>
-							<li><a href="#">Item</a></li>
-							<li><a href="#">Item</a></li>
-							<li class="uk-nav-divider"></li>
-							<li><a href="#">Item</a></li>
+							<?php
+								if(ISSET($messages) && $messages != null) {
+									for($i = 0; $i < count($messages); $i++) {
+								?>
+									<li><a href="<?= base_url($messages[$i]->url) ?>"><?php echo $messages[$i]->message ?></a></li>
+								<?php
+									}
+								} else {
+									echo "<center>You don't have any new messsages.</center>";
+								}
+							?>
 						</ul>
 					</div>
 				</li>
 				<li class="uk-visible@m">
 					<span class="ccomment uk-hidden uk-position-top-right uk-badge uk-badge-custom"></span>
-					<a href="#" uk-icon="icon: comment"></a>
+					<a href="#" uk-icon="icon: world"></a>
 					<div class="uk-navbar-dropdown uk-navbar-dropdown-width-2" uk-dropdown>
 						<ul class="uk-nav uk-navbar-dropdown-nav">
-							<li class="uk-active"><a href="#">Active</a></li>
-							<li><a href="#">Item</a></li>
-							<li class="uk-nav-header">Header</li>
-							<li><a href="#">Item</a></li>
-							<li><a href="#">Item</a></li>
-							<li class="uk-nav-divider"></li>
-							<li><a href="#">Item</a></li>
+							<?php
+								if(ISSET($notifications2) && $notifications2 != null) {
+									for($i = 0; $i < count($notifications2); $i++) {
+								?>
+									<li><a href="<?= base_url($notifications2[$i]->url) ?>"><?php echo $notifications2[$i]->message ?></a></li>
+								<?php
+									}
+								} else {
+									echo "<center>You don't have any new updates.</center>";
+								}
+							?>
 						</ul>
 					</div>
 				</li>
 				<li class="uk-visible@m">
-					<span class="cnotif uk-hidden uk-position-top-right uk-badge uk-badge-custom">10</span>
+					<span class="cnotif uk-hidden uk-position-top-right uk-badge uk-badge-custom"></span>
 					<a href="#" uk-icon="icon: bell"></a>
 					<div class="uk-navbar-dropdown uk-navbar-dropdown-width-2" uk-dropdown>
 						<ul class="uk-nav uk-navbar-dropdown-nav">
-							<li class="uk-active"><a href="#">Active</a></li>
-							<li><a href="#">Item</a></li>
-							<li class="uk-nav-header">Header</li>
-							<li><a href="#">Item</a></li>
-							<li><a href="#">Item</a></li>
-							<li class="uk-nav-divider"></li>
-							<li><a href="#">Item</a></li>
+							<?php
+								if(ISSET($notifications) && $notifications != null) {
+									for($i = 0; $i < count($notifications); $i++) {
+								?>
+									<li><a href="<?= base_url($notifications[$i]->url) ?>"><?php echo $notifications[$i]->message ?></a></li>
+								<?php
+									}
+								} else {
+									echo "<center>You don't have any new notifications.</center>";
+								}
+							?>
 						</ul>
 					</div>
 				</li>

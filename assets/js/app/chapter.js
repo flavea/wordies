@@ -3,7 +3,7 @@ $(document).ready(function(){
 
     
     var getMax = function(){
-        return $(document).height() - $(window).height();
+        return $('#chapter').height() - $('#meta').height();
     }
     
     var getValue = function(){
@@ -11,19 +11,15 @@ $(document).ready(function(){
     }
     
     if('max' in document.createElement('progress')){
-        // Browser supports progress element
         var progressBar = $('progress');
         
-        // Set the Max attr for the first time
         progressBar.attr({ max: getMax() });
 
         $(document).on('scroll', function(){
-            // On scroll only Value attr needs to be calculated
             progressBar.attr({ value: getValue() });
         });
       
         $(window).resize(function(){
-            // On resize, both Max/Value attr needs to be calculated
             progressBar.attr({ max: getMax(), value: getValue() });
         });   
     }
@@ -33,7 +29,6 @@ $(document).ready(function(){
             value, width;
         
         var getWidth = function(){
-            // Calculate width in percentage
             value = getValue();            
             width = (value/max) * 100;
             width = width + '%';

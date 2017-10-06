@@ -18,8 +18,9 @@ class Basic_model extends CI_Model
 	}
 
 
-	public function simple_select($table, $where = null, $select = '*', $limit = null, $start = 0) {
+	public function simple_select($table, $where = null, $select = '*', $limit = null, $start = 0, $order_by = null) {
 		if($limit != null) $this->db->limit($limit, $start);
+		if($order_by != null) $this->db->order_by($order_by, 'desc');
 		if($where != null) $this->db->where($where);
 		$this->db->select($select);
 		$this->db->from($table);
@@ -46,37 +47,43 @@ class Basic_model extends CI_Model
 	}
 
 
-	public function count_all($table, $where)
+	public function count($table, $where = null, $keyword = null)
 	{
-		$this->db->where($where);
+		if($keyword != null) {
+			$this->db->like('title', $keyword);
+			$this->db->or_like('desc', $keyword);
+		}
+		if($where != null) $this->db->where($where);
 		$this->db->from($table);
 		$count = $this->db->count_all_results();
 		return $count;
 	}
 
+	public function sum($table, $what, $where = null, $keyword = null)
+	{
+		if($keyword != null) {
+			$this->db->like('title', $keyword);
+			$this->db->or_like('desc', $keyword);
+		}
+		if($where != null) $this->db->where($where);
+		$this->db->select_sum($what);
+		$query = $this->db->get($table);
+		return $query->result();
+	}
+
 	public function get_counts($user_id) {
-		$notifications = $this->count_all('notifications', $data = array('target' => $user_id, 'flag' => 0));
+		$notifications = $this->count('notifications', $data = array('target' => $user_id, 'flag' => 0, 'type' => 1));
 
-		$this->db->where('message_replies.sender', $user_id);
-		$this->db->where("STR_TO_DATE(message_replies.date,'%m/%d/%Y') >", "STR_TO_DATE(message_log.time,'%m/%d/%Y')");
-		$this->db->join('message_logs', 'message_replies.message_id = message_logs.message_id', 'left');
-		$this->db->join('message_mapping', 'message_replies.sender = message_mapping.user_id');
-		$this->db->from('message_replies');
-		$messages = $this->db->count_all_results();
+		$messages = $this->count('notifications', $data = array('target' => $user_id, 'flag' => 0, 'type' => 3));
 
-		$this->db->where("comments.flag", 0);
-		$this->db->where('stories.author_id', $user_id);
-		$this->db->join('chapters', 'comments.chapter_id = chapters.id');
-		$this->db->join('stories', 'chapters.story_id = stories.id');
-		$this->db->from('comments');
-		$comments = $this->db->count_all_results();
+		$comments = $this->count('notifications', $data = array('target' => $user_id, 'flag' => 0, 'type' => 2));
 
 
 		$count = array(
-			'message' => 1,
 			'notifications' => $notifications, 
 			'comments' => $comments, 
-			'messages' => $messages, 
+			'messages' => $messages,
+			'total' => $notifications + $comments + $messages
 			);
 		return $count;
 	}

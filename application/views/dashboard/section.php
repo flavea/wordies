@@ -1,6 +1,8 @@
  
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<?php if($permission > 2) { ?>
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=65pj8yn21zggc1ysu5bfgkk2l45vne0mn4fj3tcgh1lr0a8n"></script>
+<?php } ?>
 
 <div class="uk-margin-large-top uk-container uk-container-large">
 	<div id="dashboard-header" class="uk-margin-large-top uk-dark uk-background-muted uk-padding uk-text-center@s">
@@ -14,17 +16,27 @@
 
 	<div id="chapter" class="uk-container uk-container-small uk-margin-large">
 
-		
+		<a class="uk-button uk-button-secondary uk-margin-large-bottom" href="<?= base_url('manage/'.$chapter[0]->id) ?>"><span uk-icon="icon: arrow-left"></span> Back to Chapter</a>
+		<a class="uk-button uk-button-secondary uk-margin-large-bottom" href="<?= base_url('manage/'.$story[0]->id) ?>"><span uk-icon="icon: arrow-left"></span> Back to Story</a>
+
+		<div class="uk-alert-danger" uk-alert>
+			<a class="uk-alert-close" uk-close></a>
+			This section will be autosaved every five minutes. If you don't want the changes to be published yet set the chapter to private.
+		</div>
+		<?php if($permission > 2) { ?>
 		<a class="uk-button uk-button-default btnSave" id="btnSave">Save</a>
+		<?php } ?>
+		<?php if($permission > 3) { ?>
 		<a class="uk-button uk-button-default" id="btnDelete">Delete</a>
+		<?php } ?>
 
 		<div class="uk-margin-small-top">
-			<input class="uk-input uk-form-large uk-form-blank uk-placeholder" type="text" placeholder="Short Description" id="desc" value="<?php echo $section[0]->desc ?>">
+			<input class="uk-input uk-form-large uk-form-blank uk-placeholder" type="text" placeholder="Short Description" id="desc" value="<?php echo $section[0]->desc ?>" <?php if($permission == 1) echo "readonly"; ?>>
 		</div>
 
 
 		<div class="uk-margin-small-top">
-			<input class="uk-input uk-form-blank uk-placeholder" type="text" id="characters" placeholder="Characters Involved" value="<?php echo $section[0]->characters ?>">
+			<input class="uk-input uk-form-blank uk-placeholder" type="text" id="characters" placeholder="Characters Involved" value="<?php echo $section[0]->characters ?>" <?php if($permission == 1) echo "readonly"; ?>>
 		</div>
 
 		<div class="uk-margin-small-top">
@@ -41,13 +53,17 @@
 			<div class="uk-text-right uk-text-small">
 				<span class="words"></span>
 			</div>
+			<?php if($permission > 2) { ?>
 			<input type="hidden" id="id" value="<?php echo $id ?>">
 
 			<input type="hidden" id="story_id" value="<?php echo $story[0]->id ?>">
 		</div>
 		<br>
 		<a class="uk-button uk-button-default btnSave" id="btnSave">Save</a>
+		<?php if($permission > 3) { ?>
 		<a class="uk-button uk-button-default" id="btnDelete">Delete</a>
+		<?php } ?>
+		<?php } ?>
 	</div>
 </div>
 
@@ -96,16 +112,15 @@
 		}
 
 		$( "#characters" )
-      // don't navigate away from the field on tab when selecting an item
-      .on( "keydown", function( event ) {
-      	if ( event.keyCode === $.ui.keyCode.TAB &&
-      		$( this ).autocomplete( "instance" ).menu.active ) {
-      		event.preventDefault();
-      }
-  })
-      .autocomplete({
-      	minLength: 0,
-      	source: function( request, response ) {
+		.on( "keydown", function( event ) {
+			if ( event.keyCode === $.ui.keyCode.TAB &&
+				$( this ).autocomplete( "instance" ).menu.active ) {
+				event.preventDefault();
+		}
+	})
+		.autocomplete({
+			minLength: 0,
+			source: function( request, response ) {
           // delegate back to autocomplete, but extract the last term
           response( $.ui.autocomplete.filter(
           	availableTags, extractLast( request.term ) ) );
@@ -128,43 +143,43 @@
   });
 
 
-      function autosave() {
+		function autosave() {
 
-      	var content = $(".tinymce").html();
-      	var desc = $("#desc").val();
-      	var characters = $("#characters").val();
-      	$.ajax({
-      		type: "POST",
-      		data: {
-      			"id": id,
-      			"content": content,
-      			"desc": desc,
-      			"characters": characters,
-      			"word_count": iTotalWords
-      		},
-      		dataType: "json",
-      		url: getBaseURL() + "dashboard/save_section",
-      		success: function(data) {
-      			UIkit.notification({
-      				message: 'Saved',
-      				status: 'primary',
-      				pos: 'top-right',
-      				timeout: 5000
-      			});
+			var content = $(".tinymce").html();
+			var desc = $("#desc").val();
+			var characters = $("#characters").val();
+			$.ajax({
+				type: "POST",
+				data: {
+					"id": id,
+					"content": content,
+					"desc": desc,
+					"characters": characters,
+					"word_count": iTotalWords
+				},
+				dataType: "json",
+				url: getBaseURL() + "dashboard/save_section",
+				success: function(data) {
+					UIkit.notification({
+						message: 'Saved',
+						status: 'primary',
+						pos: 'top-right',
+						timeout: 5000
+					});
 
-      			$('.save').html("Last Autosaved on " + dt.toLocaleString());
-      		}
-      	});
-      }
-
-
-      window.setInterval(function(){
-      	autosave();
-      }, 60000);
+					$('.save').html("Last Autosaved on " + dt.toLocaleString());
+				}
+			});
+		}
 
 
-      $( ".btnSave" ).click(function() {
-      	autosave();
-      });
-  });
+		window.setInterval(function(){
+			autosave();
+		}, 60000);
+
+
+		$( ".btnSave" ).click(function() {
+			autosave();
+		});
+	});
 </script>

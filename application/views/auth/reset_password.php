@@ -3,7 +3,12 @@
   <div class="uk-card uk-card-default uk-card-body">
 <h1><?php echo lang('reset_password_heading');?></h1>
 
-<div id="infoMessage"><?php echo $message;?></div>
+<?php if($message != null) { ?>
+    <div class="uk-alert-danger" uk-alert>
+    <a class="uk-alert-close" uk-close></a>
+      <?php echo $message;?>
+      </div>
+      <?php } ?>
 
 <?php echo form_open('auth/reset_password/' . $code);?>
 

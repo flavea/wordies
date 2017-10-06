@@ -1,13 +1,13 @@
 
- <div class="uk-container uk-container-small uk-margin-xlarge-top">
-<h1 class="uk-margin-large-top">Title</h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nulla aliquet porttitor lacus luctus accumsan tortor posuere. Facilisi etiam dignissim diam quis enim lobortis. Amet venenatis urna cursus eget. Pellentesque habitant morbi tristique senectus et netus et. Tellus id interdum velit laoreet id. Ultricies integer quis auctor elit sed. Gravida arcu ac tortor dignissim. Vestibulum mattis ullamcorper velit sed ullamcorper. In tellus integer feugiat scelerisque varius morbi enim nunc faucibus. Nulla pharetra diam sit amet nisl suscipit adipiscing. Risus nec feugiat in fermentum posuere urna. Egestas integer eget aliquet nibh praesent tristique.
-
-<p>At erat pellentesque adipiscing commodo elit at imperdiet dui accumsan. Lacus laoreet non curabitur gravida arcu ac tortor dignissim convallis. Egestas egestas fringilla phasellus faucibus. Risus feugiat in ante metus dictum at. Fermentum posuere urna nec tincidunt praesent semper feugiat nibh sed. Leo duis ut diam quam nulla. Blandit volutpat maecenas volutpat blandit. Volutpat odio facilisis mauris sit. Etiam sit amet nisl purus in mollis. Convallis convallis tellus id interdum velit laoreet id donec. Sit amet consectetur adipiscing elit pellentesque habitant morbi tristique. Sit amet luctus venenatis lectus magna fringilla. Ultrices in iaculis nunc sed augue. Vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare. Sed faucibus turpis in eu mi bibendum neque. In nisl nisi scelerisque eu ultrices vitae. Elit pellentesque habitant morbi tristique senectus et.
-
-<p>Consectetur libero id faucibus nisl. Tortor consequat id porta nibh venenatis. Integer enim neque volutpat ac tincidunt vitae semper quis lectus. Porttitor leo a diam sollicitudin tempor id eu. Posuere sollicitudin aliquam ultrices sagittis orci. Tincidunt arcu non sodales neque sodales ut etiam. Blandit volutpat maecenas volutpat blandit. Vitae congue mauris rhoncus aenean vel elit scelerisque mauris pellentesque. Sagittis eu volutpat odio facilisis. Sed libero enim sed faucibus turpis. Risus nec feugiat in fermentum posuere urna nec. Malesuada nunc vel risus commodo viverra. Faucibus interdum posuere lorem ipsum dolor sit. Turpis tincidunt id aliquet risus feugiat in. Tellus in hac habitasse platea dictumst. Sapien et ligula ullamcorper malesuada proin. Feugiat in ante metus dictum at tempor commodo ullamcorper. Dignissim enim sit amet venenatis urna cursus eget nunc. Integer eget aliquet nibh praesent tristique magna.
-
-<p>Nec feugiat in fermentum posuere urna nec. A scelerisque purus semper eget duis at tellus. Iaculis urna id volutpat lacus. Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi tristique. Tincidunt praesent semper feugiat nibh sed pulvinar. Non arcu risus quis varius quam. Sagittis id consectetur purus ut faucibus pulvinar elementum. Non curabitur gravida arcu ac tortor dignissim convallis aenean. Est ante in nibh mauris cursus mattis molestie. Amet risus nullam eget felis eget. Suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque. Posuere ac ut consequat semper viverra. Vivamus at augue eget arcu. Tortor id aliquet lectus proin nibh. Nibh praesent tristique magna sit amet purus gravida quis. Amet cursus sit amet dictum sit amet justo. Aenean pharetra magna ac placerat vestibulum lectus mauris ultrices. Pulvinar etiam non quam lacus suspendisse faucibus interdum posuere.
-
-<p>Varius quam quisque id diam vel quam elementum pulvinar. Morbi tristique senectus et netus. Pulvinar neque laoreet suspendisse interdum consectetur libero. Mi quis hendrerit dolor magna. Egestas sed sed risus pretium quam. Neque volutpat ac tincidunt vitae semper quis. Molestie nunc non blandit massa enim. Semper feugiat nibh sed pulvinar proin gravida hendrerit lectus. Cursus mattis molestie a iaculis at. Habitant morbi tristique senectus et netus.
+ <div class="uk-container uk-container-small uk-margin-xlarge">
+<h1 class="uk-margin-large-top">Fiction Types</h1>
+<dl class="uk-description-list">
+<?php foreach ($types as $type) {
+	?>
+    <dt><?= $type->category_name; ?></dt>
+    <dd><?= $type->category_desc; ?></dd>
+<?php
+}
+?>
+</dl>
 </div>

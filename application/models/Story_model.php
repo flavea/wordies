@@ -3,45 +3,45 @@
 class Story_model extends CI_Model
 {
 
-	public function get_all_stories($limit = 0, $order_by = 1, $type = 0, $genre = 0, $rating = 0, $keyword = '') {
-
-		if($limit == 0) $this->db->limit(10);
-		if($order_by == 1) $this->db->order_by('stories.updated', 'desc');
-		if($keyword != '') $this->db->or_like('stories.desc', $keyword);
-		if($keyword != '') $this->db->like('stories.title', $keyword);
-		if($rating != '') $this->db->where('stories.rating_id', $rating);
-		if($type != '') $this->db->where('stories.type_id', $type);
-		if($genre != '') $this->db->where('stories.genre_id', $genre);
-		//$this->db->join('[story_stats]', '[story_stats].id = stories.id');
-		$this->db->join('ratings', 'stories.rating_id = ratings.rating_id');
-		$this->db->join('categories', 'stories.type_id = categories.category_id');
-		$this->db->join('genres', 'stories.genre_id = genres.genre_id');
-		//$this->db->select('stories.id, stories.name, stories.desc, stories.cover, genres.genre_name, categories.category_name, ratings.rating_name, [story_stats].chapters_count, [story_stats].views_count, [story_stats].comments_count, [story_stats].words_count, [story_stats].subsribers, [story_stats].votes');
-		$query = $this->db->get('stories');
-		return $query->result();
-
-	}
-
-	public function get_user_stories($user_id, $status = 'all') {
-		$this->db->order_by('stories.updated', 'desc');
-		$this->db->where('stories.author_id', $user_id);
-		if($status != 'all') {
-			$this->db->where('stories.status', $status);
-			//$this->db->join('[story_stats]', '[story_stats].id = stories.id');
-			$this->db->join('ratings', 'stories.rating_id = ratings.id');
-			$this->db->join('categories', 'stories.type_id = categories.id');
-			$this->db->join('genres', 'stories.genre_id = genres.id');
+	public function browse_stories($where = null, $limit = null, $start = 0, $order_by = null, $keyword = null) {
+		if($limit != null) $this->db->limit($limit, $start);
+		if($order_by != null) $this->db->order_by($order_by, 'desc');
+		if($keyword != null) {
+			$this->db->like('title', $keyword);
+			$this->db->or_like('desc', $keyword);
 		}
-		//$this->db->select('stories.id, stories.name, stories.desc, stories.cover, genres.genre_name, categories.category_name, ratings.rating_name, [story_stats].chapters_count, [story_stats].views_count, [story_stats].comments_count, [story_stats].words_count, [story_stats].subsribers, [story_stats].votes');
-		$query = $this->db->get('stories');
+		if($where != null) $this->db->where($where);
+		$query = $this->db->get('stories_view');
 		return $query->result();
 	}
 
-	public function get_story_comments($story_id, $limit) {
-		if($limit != null) $this->db->limit($limit);
-		$this->db->where('chapters.story_id', $story_id);
-		$this->db->join('chapters', 'chapters.id = comments.chapter_id');
-		$query = $this->db->get('comments');
+	public function get_comments($chapter) {
+		$this->db->order_by('created', 'asc');
+		$this->db->where('comments.chapter_id', $chapter);
+		$this->db->join('users', 'comments.user_id = users.id', 'left');
+		$this->db->select('comments.id, comments.comment, comments.user_id, comments.created, users.username');
+		$this->db->from('comments');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function get_parent_comments($id) {
+		$this->db->order_by('created', 'asc');
+		$this->db->where('comments.id', $id);
+		$this->db->join('users', 'comments.user_id = users.id', 'left');
+		$this->db->select('comments.id, comments.comment, comments.user_id, comments.created, users.username');
+		$this->db->from('comments');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function get_child_comments($id) {
+		$this->db->order_by('created', 'asc');
+		$this->db->where('comments.parent_id', $id);
+		$this->db->join('users', 'comments.user_id = users.id', 'left');
+		$this->db->select('comments.id, comments.comment, comments.user_id, comments.created, users.username');
+		$this->db->from('comments');
+		$query = $this->db->get();
 		return $query->result();
 	}
 

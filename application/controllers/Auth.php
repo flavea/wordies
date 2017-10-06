@@ -453,7 +453,7 @@ class Auth extends MY_Controller {
 			$password = $this->input->post('password');
 
 		}
-		if ($this->form_validation->run() == true && $this->ion_auth->register($identity, $password, $email, $additional_data))
+		if ($this->form_validation->run() == true && $this->ion_auth->register($identity, $password, $email))
 		{
             // check to see if we are creating the user
             // redirect them back to the admin page
@@ -520,18 +520,9 @@ class Auth extends MY_Controller {
 
 		// validate form input
 		$this->form_validation->set_rules('identity', $this->lang->line('edit_user_validation_fname_label'), 'required');
-		$this->form_validation->set_rules('last_name', $this->lang->line('edit_user_validation_lname_label'), 'required');
-		$this->form_validation->set_rules('phone', $this->lang->line('edit_user_validation_phone_label'), 'required');
-		$this->form_validation->set_rules('company', $this->lang->line('edit_user_validation_company_label'), 'required');
 
 		if (isset($_POST) && !empty($_POST))
 		{
-			// do we have a valid request?
-			if ($this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id'))
-			{
-				show_error($this->lang->line('error_csrf'));
-			}
-
 			// update the password if it was posted
 			if ($this->input->post('password'))
 			{
@@ -567,33 +558,23 @@ class Auth extends MY_Controller {
 					}
 				}
 
-			// check to see if we are updating the user
+				$data['username'] = $this->input->post('identity');
+				$data['about'] = $this->input->post('about');
+				$data['twitter'] = $this->input->post('twitter');
+				$data['facebook'] = $this->input->post('facebook');
+				$data['profile_image'] = $this->input->post('profile_image');
+				
 				if($this->ion_auth->update($user->id, $data))
 				{
-			    	// redirect them back to the admin page if admin, or to the base url if non admin
-					$this->session->set_flashdata('message', $this->ion_auth->messages() );
-					if ($this->ion_auth->is_admin())
-					{
-						redirect('auth', 'refresh');
-					}
-					else
-					{
-						redirect('/', 'refresh');
-					}
+			    	redirect('auth/edit_profile', 'refresh');
 
 				}
 				else
 				{
 			    	// redirect them back to the admin page if admin, or to the base url if non admin
 					$this->session->set_flashdata('message', $this->ion_auth->errors() );
-					if ($this->ion_auth->is_admin())
-					{
-						redirect('auth', 'refresh');
-					}
-					else
-					{
-						redirect('/', 'refresh');
-					}
+					
+			    	redirect('auth/edit_profile', 'refresh');
 
 				}
 
@@ -623,21 +604,28 @@ class Auth extends MY_Controller {
 			'id'    => 'profile_image',
 			'type'  => 'text',
 			'class' => 'uk-input',
-			'value' => $this->form_validation->set_value('first_name', $user->profile_image),
+			'value' => $this->form_validation->set_value('profile_image', $user->profile_image),
+			);
+		$this->data['about'] = array(
+			'name'  => 'about',
+			'id'    => 'about',
+			'type'  => 'text',
+			'class' => 'uk-input',
+			'value' => $this->form_validation->set_value('about', $user->about),
 			);
 		$this->data['twitter'] = array(
 			'name'  => 'twitter',
 			'id'    => 'twitter',
 			'type'  => 'text',
 			'class' => 'uk-input',
-			'value' => $this->form_validation->set_value('last_name', $user->twitter),
+			'value' => $this->form_validation->set_value('profile_image', $user->twitter),
 			);
 		$this->data['facebook'] = array(
 			'name'  => 'facebook',
 			'id'    => 'facebook',
 			'type'  => 'text',
 			'class' => 'uk-input',
-			'value' => $this->form_validation->set_value('company', $user->facebook),
+			'value' => $this->form_validation->set_value('facebook', $user->facebook),
 			);
 		$this->data['password'] = array(
 			'name' => 'password',

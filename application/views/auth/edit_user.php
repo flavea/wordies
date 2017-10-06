@@ -1,7 +1,14 @@
+<div class="uk-container uk-container-small uk-margin-xlarge-top uk-padding-large">
+
 <h1><?php echo lang('edit_user_heading');?></h1>
 <p><?php echo lang('edit_user_subheading');?></p>
 
-<div id="infoMessage"><?php echo $message;?></div>
+<?php if($message != null) { ?>
+    <div class="uk-alert-danger" uk-alert>
+    <a class="uk-alert-close" uk-close></a>
+      <?php echo $message;?>
+      </div>
+      <?php } ?>
 
 <?php echo form_open(uri_string());?>
 
@@ -11,7 +18,11 @@
       </p>
       <p>
             <label>Profile Picture</label>
-            <?php echo form_input($profile);?>
+            <?php echo form_input($profile_image);?>
+      </p>
+      <p>
+            <label>About Me</label>
+            <?php echo form_input($about);?>
       </p>
       <p>
             <label>Twitter Username</label>
@@ -23,12 +34,12 @@
       </p>
       <p>
 
-            <?php echo lang('edit_user_password_label', 'password');?> <br />
-            <?php echo form_input($identity);?>
+            New <?php echo lang('edit_user_password_label', 'password');?> <br />
+            <?php echo form_input($password);?>
       </p>
 
       <p>
-            <?php echo lang('edit_user_password_label', 'password');?> <br />
+            Old <?php echo lang('edit_user_password_label', 'password');?> <br />
             <?php echo form_input($password);?>
       </p>
 
@@ -63,6 +74,9 @@
       <?php echo form_hidden('id', $user->id);?>
       <?php echo form_hidden($csrf); ?>
 
+      <br>
+      <br>
       <input type="submit" name="submit" value="Edit Profile" class="uk-button uk-button-secondary" />
 
 <?php echo form_close();?>
+</div>

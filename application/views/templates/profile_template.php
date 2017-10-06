@@ -7,6 +7,6 @@ $this->load->view('templates/parts/header'); ?>
 </div>
 </div>
 <footer>
-  <p>&copy; 2001-2016 Web Corporation | <a href="#">About</a> | <a href="#">Terms of use</a></p>
+  <p>&copy; Wordies
 </footer>
 <?php $this->load->view('templates/parts/footer');?>

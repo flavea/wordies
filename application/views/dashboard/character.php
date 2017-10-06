@@ -1,31 +1,31 @@
 
+<?php if($permission > 2) { ?>
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=65pj8yn21zggc1ysu5bfgkk2l45vne0mn4fj3tcgh1lr0a8n"></script>
+<?php } ?>
 
 <div class="uk-margin-xlarge-top uk-container uk-container-large">
-	
 <?php $this->load->view('dashboard/story_header');?>
-
 
 	<div id="chapter" class="uk-container uk-container-small uk-margin-large">
 
-		<a class="uk-button uk-button-secondary uk-margin-large-bottom" href="<?= base_url('dashboard/story/'.$story[0]->id) ?>"><span uk-icon="icon: arrow-left"></span> Back to Story</a>
+		<a class="uk-button uk-button-secondary uk-margin-large-bottom" href="<?= base_url('manage/'.$story[0]->id) ?>"><span uk-icon="icon: arrow-left"></span> Back to Story</a>
 
 
 		<label class="uk-margin-small-top uk-display-block">Name</label>
-		<input class="uk-input uk-form-large" type="text" placeholder="Character Name Name" value="<?php echo $character[0]->name ?>" name="name" id="name">
+		<input class="uk-input uk-form-large" type="text" placeholder="Character Name Name" value="<?php echo $character[0]->name ?>" name="name" id="name" <?php if($permission == 1) echo "readonly"; ?>>
 
 		<label class="uk-margin-small-top uk-display-block">Age</label>
-		<input class="uk-input" type="number" name="age" value="<?php echo $character[0]->age ?>" placeholder="Age of Your Character" id="age">
+		<input class="uk-input" type="number" name="age" value="<?php echo $character[0]->age ?>" placeholder="Age of Your Character" id="age" <?php if($permission == 1) echo "readonly"; ?>>
 
 		<label class="uk-margin-small-top uk-display-block">Gender</label>
-		<select class="uk-select" name="gender" id="gender">
-			<option value="M">Male</option>
-			<option value="F">Female</option>
-			<option value="0">Others</option>
+		<select class="uk-select" name="gender" id="gender" <?php if($permission == 1) echo "readonly"; ?>>
+			<option value="M" <?php if($character[0]->name == "M") echo "selected" ?>>Male</option>
+			<option value="F" <?php if($character[0]->name == "F") echo "selected" ?>>Female</option>
+			<option value="0" <?php if($character[0]->name == "0") echo "selected" ?>>Others</option>
 		</select>
 
 		<label class="uk-margin-small-top uk-display-block">Image</label>
-		<input class="uk-input" type="text" name="face" value="<?php echo $character[0]->face ?>" placeholder="URL to an image of your character" id="face">
+		<input class="uk-input" type="text" name="face" value="<?php echo $character[0]->face ?>" placeholder="URL to an image of your character" id="face" <?php if($permission == 1) echo "readonly"; ?>>
 
 		<label class="uk-margin-small-top uk-display-block">Personality</label>
 		<div id="personality" class="tinymce uk-form-blank uk-padding-small uk-placeholder uk-margin-remove">
@@ -63,19 +63,25 @@
 				echo $character[0]->other;
 			} ?>
 		</div>
+		<?php if($permission > 2) { ?>
 		<div class="uk-margin">
 			<input type="hidden" name="id" id="id" value="<?php echo $id?>">
 			<input type="hidden" name="story_id" id="story_id" value="<?php echo $story[0]->id?>">
 		</div>
 		<a class="uk-button uk-button-default" id="btnSave">Save</a>
+		<?php } ?>
+		<?php if($permission > 3) { ?>
 		<a class="uk-button uk-button-default" id="btnDelete">Delete</a>
+		<?php } ?>
 
 
 
 		<div class="uk-margin-large-top uk-margin-large-bottom">
 			<h1 class="uk-heading-divider">
 				<span>Relationships</span>
+				<?php if($permission > 2) { ?>
 				<a class="uk-icon-button uk-float-right uk-background-secondary uk-light uk-margin-medium-top" uk-icon="icon: plus; ratio: .7" title="Add Sections" uk-tooltip uk-toggle="target: #new-relation"></a>
+				<?php } ?>
 			</h1>
 
 			<?php if(isset($relations) && $relations != null) {
@@ -86,8 +92,9 @@
 							<?php echo $relations[$i]->name ?>
 						</h3>
 						<div class="uk-position-right uk-margin-medium-right">
-							<a class="uk-icon-button" uk-icon="icon: file-edit; ratio: .7" title="Edit" href="<?= base_url('dashboard/relation/'.$relations[$i]->id) ?>"></a>
+							<a class="uk-icon-button" uk-icon="icon: file-edit; ratio: .7" title="Edit" href="<?= base_url('relationship/'.$relations[$i]->id) ?>"></a>					<?php if($permission > 3) { ?>
 							<a class="btnDelete uk-icon-button" uk-icon="icon: trash; ratio: .7" title="Delete" uk-tooltip target="relation" target-id="<?php echo $relations[$i]->id ?>" uk-toggle="target: #delete"></a>
+							<?php } ?>
 						</div>
 						
 						<?php echo $relations[$i]->desc ?>
@@ -104,7 +111,7 @@
 </div>
 
 
-
+<?php if($permission > 2) { ?>
 <div id="new-relation" uk-modal>
 	<div class="uk-modal-dialog uk-modal-body">
 		<button class="uk-modal-close-default" type="button" uk-close></button>
@@ -122,7 +129,9 @@
 
 	</div>
 </div>
+<?php } ?>
 
+<?php if($permission > 3) { ?>
 <div id="delete" uk-modal>
   <div class="uk-modal-dialog uk-modal-body uk-text-center">
     <button class="uk-modal-close-default" type="button" uk-close></button>
@@ -131,6 +140,7 @@
     <a class="uk-button uk-button-default uk-modal-close">No</a>
   </div>
 </div>
+<?php } ?>
 
 
 <script>

@@ -1,12 +1,16 @@
 <div class="uk-container uk-container-small uk-margin-xlarge-top uk-padding-large">
 
   <div class="uk-card uk-card-default uk-card-body">
-  <h1><?php echo lang('create_user_heading');?></h1>
-<p><?php echo lang('create_user_subheading');?></p>
+  <h1>Register</h1>
 
-<div id="infoMessage"><?php echo $message;?></div>
+<?php if($message != null) { ?>
+    <div class="uk-alert-danger" uk-alert>
+    <a class="uk-alert-close" uk-close></a>
+      <?php echo $message;?>
+      </div>
+      <?php } ?>
 
-<?php echo form_open("auth/create_user");?>
+<?php echo form_open("auth/register");?>
 
       
       <?php

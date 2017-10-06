@@ -3,7 +3,6 @@
 	<h2 class="category-title"><span>My Books</span></h2>
 
 	<a class="uk-button uk-button-secondary uk-margin-medium-bottom" uk-toggle="target: #new-story"><span uk-icon="icon: plus-circle" class="uk-margin-small-right"></span> New Story</a>
-	<a class="uk-button uk-button-secondary uk-margin-medium-bottom" href="#"><span uk-icon="icon: bolt" class="uk-margin-small-right"></span> Statistics</a>
 
 	<div class="uk-child-width-1-1@s uk-child-width-1-2@m uk-child-width-1-3@l" uk-grid uk-height-match="target: > div > .uk-card">
 
@@ -16,7 +15,7 @@
 						<div class="uk-grid-small uk-flex-middle" uk-grid>
 							<div class="uk-width-expand">
 								<h3 class="uk-card-title uk-margin-remove-bottom"><a class="uk-link-reset" href="<?= base_url('story/'.$story->id) ?>"><?php echo $story->title ?></a></h3>
-								<p class="uk-text-meta uk-margin-remove-top"><time datetime="2016-04-01T19:00"><?php echo $story->updated ?></time></p>
+								<p class="uk-text-meta uk-margin-remove-top"><time><?php echo $story->updated ?></time></p>
 							</div>
 						</div>
 					</div>
@@ -24,8 +23,8 @@
 						<p><?php echo $story->desc ?></p>
 					</div>
 					<div class="uk-card-footer">
-						<a href="#" uk-icon="icon: file-edit"></a>
-						<a href="#" uk-icon="icon: trash"></a>
+						<a href="<?= base_url('manage/'.$story->id) ?>" uk-icon="icon: file-edit"></a>
+						<a uk-icon="icon: trash" target="story" target-id="<?php echo $story->id ?>" uk-toggle="target: #delete"></a>
 					</div>
 				</div>
 			</div>
@@ -54,6 +53,9 @@
 					</div>
 					<div class="uk-card-body">
 						<p><?php echo $story->desc ?></p>
+					</div>
+					<div class="uk-card-footer">
+						<a href="<?= base_url('manage/'.$story->id) ?>" uk-icon="icon: file-edit"></a>
 					</div>
 				</div>
 			</div>
@@ -119,6 +121,21 @@
 		</div>
 
 		<div class="uk-margin">
+			<select class="uk-select" name="language">
+				
+				<?php
+				if(ISSET($languages) && $languages != null) {
+					for($i = 0; $i < count($languages); $i++) {
+						?>
+						<option value="<?php echo $languages[$i]->id ?>"><?php echo $languages[$i]->name ?></option>
+						<?php
+					}
+				}
+				?>
+			</select>
+		</div>
+
+		<div class="uk-margin">
 			<select class="uk-select" name="rating">
 				<?php
 				if(ISSET($ratings) && $ratings != null) {
@@ -142,3 +159,37 @@
 	</div>
 </div>
 
+
+<div id="delete" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body uk-text-center">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+    <p>Are you sure you want to delete this?</p>
+    <a class="uk-button uk-button-secondary" id="btnDeleteFinal">Yes</a>
+    <a class="uk-button uk-button-default uk-modal-close">No</a>
+  </div>
+</div>
+
+<script type="text/javascript">
+	$( ".btnDelete" ).click(function() {
+    target = $(this).attr("target");
+    targetid = $(this).attr("target-id");
+  });
+
+
+  $( "#btnDeleteFinal" ).click(function() {
+    $.ajax({
+      type: "POST",
+      data: {
+        "id": targetid
+      },
+      dataType: "json",
+      async: false,
+      url: getBaseURL() + "dashboard/delete_" + target,
+      success: function(data) {
+        alert("Delete success.");
+        if(target == "character") location.href = getBaseURL() + "dashboard";
+        else location.reload();
+      }
+    });
+  });
+</script>
